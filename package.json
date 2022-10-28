@@ -1,0 +1,22 @@
+{
+    "name": "dom-control",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^18.11.4",
+        "jest": "^29.2.1",
+        "jest-environment-jsdom": "^29.2.1",
+        "ts-jest": "^29.0.3",
+        "typescript": "^4.8.4"
+    },
+    "dependencies": {
+        "@riadh-adrani/utility-js": "^0.12.0"
+    }
+}
