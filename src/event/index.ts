@@ -1,4 +1,4 @@
-const isOnEventName = (name: string): boolean => {
+export const isOnEventName = (name: string): boolean => {
     if (typeof name !== "string") return false;
 
     const onEventRegex = /on[a-z]{1,}/;
