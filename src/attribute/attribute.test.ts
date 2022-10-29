@@ -6,25 +6,29 @@ it.each([
     ["class", "test"],
     ["id", "test"],
     ["data-tooltip", "hello"],
+    ["height", 50],
 ])("should inject attribute : '%s'", (attribute, value) => {
     const el = createElement("input", { attributes: { type: "checkbox" } });
 
-    setAttribute(attribute, value, el);
+    setAttribute(attribute, value as string, el);
 
-    expect(el.getAttribute(attribute)).toBe(value);
+    expect(el.getAttribute(attribute)).toBe(value.toString());
 });
 
-it("should inject 'toggle' attribute : '%s'", () => {
-    const el = createElement("input", { attributes: { type: "checkbox" } });
+it.each([["checked"], ["contenteditable"], ["disabled"]])(
+    "should inject 'toggle' attribute : '%s'",
+    (attr) => {
+        const el = createElement("input", { attributes: { type: "checkbox" } });
 
-    setAttribute("checked", true, el);
+        setAttribute(attr, true, el);
 
-    expect(Array.of(...el.getAttributeNames()).includes("checked")).toBeTruthy();
+        expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeTruthy();
 
-    setAttribute("checked", false, el);
+        setAttribute(attr, false, el);
 
-    expect(Array.of(...el.getAttributeNames()).includes("checked")).toBeFalsy();
-});
+        expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeFalsy();
+    }
+);
 
 it.each([
     ["class", "test", null],

@@ -1,4 +1,5 @@
 const toggleAttributes = [
+    "contenteditable",
     "autofocus",
     "autoplay",
     "allowfullscreen",
@@ -17,6 +18,8 @@ const toggleAttributes = [
     "readonly",
     "required",
     "selected",
+    "async",
+    "defer",
 ];
 
 /**
@@ -38,6 +41,8 @@ export const setAttribute = (attribute: string, value: string | boolean, element
         element.toggleAttribute(attribute, (value as boolean) === true);
     } else {
         element.setAttribute(attribute, value as string);
+
+        (element as any)[attribute] = value;
     }
 };
 
