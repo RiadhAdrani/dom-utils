@@ -5,7 +5,7 @@ import {
     createTextNode,
     getElementChildrenCount,
     getElementPosition,
-    injectElement,
+    injectNode,
     isElement,
     isElementInDocument,
     isElementWithinElement,
@@ -91,7 +91,7 @@ it.each([
 ])("should inject element : '%s'", (element, index, expected) => {
     const el = createElement("div");
 
-    injectElement(element as Element, el, index);
+    injectNode(element as Element, el, index);
 
     expect(el.innerHTML).toBe(expected);
 });
@@ -110,7 +110,7 @@ it.each([
         children: [createElement("p"), createElement("p")],
     });
 
-    injectElement(element as Element, el, index);
+    injectNode(element as Element, el, index);
 
     expect(el.innerHTML).toBe(expected);
 });
