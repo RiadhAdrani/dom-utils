@@ -12,6 +12,7 @@ import {
     isTextNode,
     removeChildAtPosition,
     removeNode,
+    replaceNodeWith,
     setTextNodeData,
 } from ".";
 
@@ -231,7 +232,7 @@ it("should change the position of an element", () => {
 });
 
 it("should remove elements", () => {
-    let parent;
+    let parent: Element;
 
     const child1 = createElement("p");
     const child2 = createElement("span");
@@ -243,4 +244,24 @@ it("should remove elements", () => {
     parent = createElement("div", { children: [child1, child2, child3] });
     removeNode(child1);
     expect(parent.innerHTML).toBe("<span></span><p></p>");
+});
+
+it("should replace elements", () => {
+    let child: any = createElement("p");
+    let newChild: any = createElement("span");
+    let parent = createElement("div", { children: [child] });
+    replaceNodeWith(child, newChild);
+    expect(parent.innerHTML).toBe("<span></span>");
+
+    child = createTextNode("text");
+    newChild = createElement("span");
+    parent = createElement("div", { children: [child] });
+    replaceNodeWith(child, newChild);
+    expect(parent.innerHTML).toBe("<span></span>");
+
+    newChild = createTextNode("text");
+    child = createElement("span");
+    parent = createElement("div", { children: [child] });
+    replaceNodeWith(child, newChild);
+    expect(parent.innerHTML).toBe("text");
 });

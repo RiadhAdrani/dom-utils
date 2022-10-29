@@ -219,3 +219,17 @@ export const removeNode = (node: Element | Text) => {
         node.remove();
     }
 };
+
+/**
+ * replace the given element with the new one.
+ * @param element target element
+ * @param newElement replacing element
+ */
+export const replaceNodeWith = (element: Element | Text, newElement: Element | Text) => {
+    if (
+        (isElement(element) || isTextNode(element)) &&
+        (isElement(newElement) || isTextNode(newElement))
+    ) {
+        element.replaceWith(newElement);
+    }
+};
