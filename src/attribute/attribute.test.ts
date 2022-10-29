@@ -1,5 +1,5 @@
 import { expect, it } from "@jest/globals";
-import { removeAttribute, setAttribute } from ".";
+import { setAttribute } from ".";
 import { createElement } from "../element";
 
 it.each([

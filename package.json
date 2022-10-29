@@ -7,7 +7,14 @@
         "test": "jest",
         "build": "tsc"
     },
-    "keywords": [],
+    "keywords": [
+        "dom",
+        "control",
+        "js",
+        "riadh",
+        "adrani",
+        "ts"
+    ],
     "author": "",
     "license": "ISC",
     "devDependencies": {

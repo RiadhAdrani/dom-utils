@@ -1,3 +1,10 @@
+/**
+ * check if the given name is an event name.
+ * - `onclick` or `oninput` are valid.
+ * - `click` or `input` are not valid.
+ *
+ * @param name event name
+ */
 export const isOnEventName = (name: string): boolean => {
     if (typeof name !== "string") return false;
 
@@ -10,23 +17,34 @@ export const isOnEventName = (name: string): boolean => {
     return true;
 };
 
-export const setEvent = (onEventName: string, callback: (e: Event) => void, element: Element) => {
+/**
+ * add an event with the given name to the target element.
+ * @param name event name.
+ * @param callback callback
+ * @param element target element
+ */
+export const setEvent = (name: string, callback: (e: Event) => void, element: Element) => {
     if (element instanceof Element === false) return;
     if (typeof callback !== "function") return;
 
-    if (!isOnEventName(onEventName)) {
+    if (!isOnEventName(name)) {
         return;
     }
 
-    (element as Record<string, any>)[onEventName] = callback;
+    (element as Record<string, any>)[name] = callback;
 };
 
-export const removeEvent = (onEventName: string, element: Element) => {
+/**
+ * remove given element named event.
+ * @param name event name.
+ * @param element target element
+ */
+export const removeEvent = (name: string, element: Element) => {
     if (element instanceof Element === false) return;
 
-    if (!isOnEventName(onEventName)) {
+    if (!isOnEventName(name)) {
         return;
     }
 
-    (element as any)[onEventName] = null;
+    (element as any)[name] = null;
 };
