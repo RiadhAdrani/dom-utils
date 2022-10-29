@@ -1,4 +1,4 @@
-export const toggleAttributes = [
+const toggleAttributes = [
     "autofocus",
     "autoplay",
     "allowfullscreen",
@@ -18,6 +18,10 @@ export const toggleAttributes = [
     "required",
     "selected",
 ];
+
+export const isToggleAttribute = (attribute: string) => {
+    return toggleAttributes.includes(attribute.trim());
+};
 
 export const setAttribute = (attribute: string, value: string | boolean, element: Element) => {
     if (toggleAttributes.includes(attribute)) {
