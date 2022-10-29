@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "build": "tsc"
     },
     "keywords": [],
     "author": "",
@@ -18,5 +19,8 @@
     },
     "dependencies": {
         "@riadh-adrani/utility-js": "^0.12.0"
-    }
+    },
+    "files": [
+        "lib/**/*"
+    ]
 }
