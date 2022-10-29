@@ -1,11 +1,12 @@
 {
-    "name": "dom-control",
-    "version": "1.0.0",
+    "name": "@riadh-adrani/dom-control-js",
+    "version": "1.0.1",
     "description": "",
-    "main": "index.js",
+    "main": "build/index.js",
     "scripts": {
         "test": "jest",
-        "build": "tsc"
+        "build": "rm -rf build && tsc",
+        "prepare": "npm run test && npm run build"
     },
     "keywords": [
         "dom",
@@ -28,6 +29,6 @@
         "@riadh-adrani/utility-js": "^0.12.0"
     },
     "files": [
-        "lib/**/*"
+        "build/**/*"
     ]
 }

@@ -90,10 +90,10 @@ export const createElement = <T = Element>(tag: string, params?: ElementOptions)
         const children = params.children;
 
         if (!Array.isArray(children)) {
-            injectElement(children, el);
+            injectNode(children, el);
         } else {
             children.forEach((child) => {
-                injectElement(child, el);
+                injectNode(child, el);
             });
         }
     }
@@ -107,7 +107,7 @@ export const createElement = <T = Element>(tag: string, params?: ElementOptions)
  * @param parent containing element
  * @param index the index in which the element will be injected. if the index is larger than the number of the parent's children or is negative, it will be injected at the end.
  */
-export const injectElement = (
+export const injectNode = (
     element: Element | string | Text,
     parent: Element,
     index?: number
@@ -207,7 +207,7 @@ export const changeChildPosition = (element: Element, newPosition: number): void
         getElementPosition(element)
     ) as Element;
 
-    injectElement(el, parent, newPosition);
+    injectNode(el, parent, newPosition);
 };
 
 /**
