@@ -1,10 +1,11 @@
 {
     "name": "@riadh-adrani/dom-control-js",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "",
     "main": "build/index.js",
     "scripts": {
         "test": "jest",
+        "test-watch": "jest --watch",
         "build": "rm -rf build && tsc",
         "prepare": "npm run test && npm run build"
     },

@@ -136,7 +136,7 @@ export const injectNode = (
  * @param parentElement container
  */
 export const isElementWithinElement = (element: any, parentElement: Element): boolean => {
-    if (!isElement(element)) return false;
+    if (element instanceof Node === false) return false;
     if (!isElement(parentElement)) return false;
 
     return parentElement.contains(element);
