@@ -27,7 +27,7 @@
         "typescript": "^4.8.4"
     },
     "dependencies": {
-        "@riadh-adrani/utility-js": "^0.12.0"
+        "@riadh-adrani/utility-js": "^0.20.1"
     },
     "files": [
         "build/**/*"

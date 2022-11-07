@@ -202,12 +202,7 @@ export const changeChildPosition = (element: Element, newPosition: number): void
 
     if (!isElement(parent)) return;
 
-    const el = removeChildAtPosition(
-        element.parentElement as Element,
-        getElementPosition(element)
-    ) as Element;
-
-    injectNode(el, parent, newPosition);
+    injectNode(element, parent, newPosition);
 };
 
 /**
