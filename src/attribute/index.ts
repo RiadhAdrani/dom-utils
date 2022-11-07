@@ -1,4 +1,4 @@
-const toggleAttributes = [
+export const togglableAttributes = [
     "contenteditable",
     "autofocus",
     "autoplay",
@@ -23,11 +23,26 @@ const toggleAttributes = [
 ];
 
 /**
- * return if the given attribute is togglable.
+ * return if the given attribute is a standard togglable one.
  * @param attribute attribute name
  */
-export const isToggleAttribute = (attribute: string) => {
-    return toggleAttributes.includes(attribute.trim());
+export const isTogglableAttribute = (attribute: string) => {
+    return togglableAttributes.includes(attribute.trim());
+};
+
+/**
+ * toggle the given attribute.
+ * @param attribute name
+ * @param value optional force value
+ * @param element target element
+ */
+export const toggleAttribute = (attribute: string, element: Element, value?: boolean) => {
+    if (value !== undefined) {
+        element.toggleAttribute(attribute, value === true);
+        (element as any)[attribute] = value === true;
+    } else {
+        element.toggleAttribute(attribute);
+    }
 };
 
 /**
@@ -37,11 +52,10 @@ export const isToggleAttribute = (attribute: string) => {
  * @param element target element
  */
 export const setAttribute = (attribute: string, value: string | boolean, element: Element) => {
-    if (toggleAttributes.includes(attribute)) {
-        element.toggleAttribute(attribute, (value as boolean) === true);
+    if (togglableAttributes.includes(attribute)) {
+        toggleAttribute(attribute, element, value as boolean);
     } else {
         element.setAttribute(attribute, value as string);
-
         (element as any)[attribute] = value;
     }
 };
@@ -52,8 +66,8 @@ export const setAttribute = (attribute: string, value: string | boolean, element
  * @param element target element
  */
 export const removeAttribute = (attribute: string, element: Element) => {
-    if (toggleAttributes.includes(attribute)) {
-        element.toggleAttribute(attribute, false);
+    if (togglableAttributes.includes(attribute)) {
+        toggleAttribute(attribute, element, false);
     } else {
         element.removeAttribute(attribute);
     }
