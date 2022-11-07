@@ -31,6 +31,16 @@ it.each([["checked"], ["contenteditable"], ["disabled"]])(
 );
 
 it.each([
+    ["checked", false],
+    ["contenteditable", true],
+    ["disabled", true],
+])("should check if an attribute is toggled on or off : '%s'", (attr, value) => {
+    const el = createElement("input", { attributes: { type: "checkbox", [attr]: value } });
+
+    expect((el as any)[attr]).toBe(value);
+});
+
+it.each([
     ["class", "test"],
     ["id", "test"],
     ["data-tooltip", "hello"],

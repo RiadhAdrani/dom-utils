@@ -26,8 +26,20 @@ export const togglableAttributes = [
  * return if the given attribute is a standard togglable one.
  * @param attribute attribute name
  */
-export const isTogglableAttribute = (attribute: string) => {
+export const isTogglableAttribute = (attribute: string): boolean => {
     return togglableAttributes.includes(attribute.trim());
+};
+
+/**
+ * check if a given attributes is toggled on.
+ *
+ * If a non-standard toggleable attribute name is provided, it will return false;
+ *
+ * @param attribute name
+ * @param element target element
+ */
+export const isToggledOn = (attribute: string, element: Element): boolean => {
+    return isTogglableAttribute(attribute) && (element as any)[attribute] === true;
 };
 
 /**
@@ -36,7 +48,7 @@ export const isTogglableAttribute = (attribute: string) => {
  * @param value optional force value
  * @param element target element
  */
-export const toggleAttribute = (attribute: string, element: Element, value?: boolean) => {
+export const toggleAttribute = (attribute: string, element: Element, value?: boolean): void => {
     if (value !== undefined) {
         element.toggleAttribute(attribute, value === true);
         (element as any)[attribute] = value === true;
@@ -51,7 +63,11 @@ export const toggleAttribute = (attribute: string, element: Element, value?: boo
  * @param value value
  * @param element target element
  */
-export const setAttribute = (attribute: string, value: string | boolean, element: Element) => {
+export const setAttribute = (
+    attribute: string,
+    value: string | boolean,
+    element: Element
+): void => {
     if (togglableAttributes.includes(attribute)) {
         toggleAttribute(attribute, element, value as boolean);
     } else {
@@ -65,8 +81,8 @@ export const setAttribute = (attribute: string, value: string | boolean, element
  * @param attribute name
  * @param element target element
  */
-export const removeAttribute = (attribute: string, element: Element) => {
-    if (togglableAttributes.includes(attribute)) {
+export const removeAttribute = (attribute: string, element: Element): void => {
+    if (isTogglableAttribute(attribute)) {
         toggleAttribute(attribute, element, false);
     } else {
         element.removeAttribute(attribute);

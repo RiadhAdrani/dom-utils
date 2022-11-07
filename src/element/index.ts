@@ -9,7 +9,7 @@ export interface ElementOptions {
     /**
      * attributes
      */
-    attributes?: ObjectOf<string>;
+    attributes?: ObjectOf<any>;
     /**
      * events
      */
