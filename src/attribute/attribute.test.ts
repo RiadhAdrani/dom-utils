@@ -1,5 +1,4 @@
-import { expect, it } from "@jest/globals";
-import { describe } from "node:test";
+import { expect, it, describe } from "@jest/globals";
 import { setAttribute, removeAttribute, toggleAttribute } from ".";
 import { createElement } from "../element";
 

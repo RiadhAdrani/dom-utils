@@ -2,7 +2,7 @@ import { expect, it, beforeEach, describe } from "@jest/globals";
 import { removeEvent, setEvent } from ".";
 import { createElement } from "../element";
 
-describe("setEvent", () => {
+describe("Event", () => {
   beforeEach(() => {
     document.body.innerHTML = "";
     count = 0;
@@ -22,16 +22,16 @@ describe("setEvent", () => {
       1,
     ],
   ])("should add click event", (event, callback, expected) => {
-    const el = createElement("div");
+    const el = createElement<HTMLElement>("div");
 
     setEvent(event as unknown as string, callback as unknown as (e: Event) => void, el);
-    (el as HTMLElement).click();
+    el.click();
 
     expect(count).toBe(expected);
   });
 
   it("should remove click event", () => {
-    const el = createElement("div");
+    const el = createElement<HTMLElement>("div");
 
     setEvent(
       "onclick",
@@ -40,12 +40,12 @@ describe("setEvent", () => {
       },
       el
     );
-    (el as HTMLElement).click();
+    el.click();
 
     expect(count).toBe(1);
 
     removeEvent("onclick", el);
-    (el as HTMLElement).click();
+    el.click();
 
     expect(count).toBe(1);
   });

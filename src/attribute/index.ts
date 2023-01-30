@@ -82,6 +82,7 @@ export const setAttribute = (
       $value = value as DomAttribute;
     }
 
+    // TODO we need to check if attribute is prefixed with data-, or if attribute is dataset and is Record<string,any>
     element.setAttribute(attribute, $value as string);
 
     // TODO does not work for attributes like class : className should be set instead.
