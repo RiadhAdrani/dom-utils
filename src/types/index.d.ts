@@ -1,3 +1,5 @@
+import { StringWithAutoComplete } from "@riadh-adrani/utility-js";
+
 export type Arrayable<T> = T | Array<T>;
 
 export type DomAttribute = string | boolean | Record<string, unknown> | undefined | null;
@@ -9,7 +11,7 @@ export type DomEvent<Ev = Event, El = HTMLElement> = Ev & {
   currentTarget: WebEventTarget<El>;
 };
 
-export type DomEventHandler<Ev = Event, El = HTMLElement> = (event: DomEvent<Ev, El>) => void;
+export type DomEventHandler<El = HTMLElement, Ev = Event> = (event: DomEvent<Ev, El>) => void;
 
 export type DomChild = string | number | null | undefined | Element | Text;
 
@@ -20,7 +22,9 @@ export type DomNamespace =
 
 export type DomElementOptions<E = Element> = {
   attributes?: Record<string, DomAttribute>;
-  events?: Record<string, DomEventHandler<_, E>>;
+  events?: Record<string, DomEventHandler<E>>;
   children?: Arrayable<DomChild>;
   namespace?: DomNamespace;
 };
+
+export type DomElementTagName = StringWithAutoComplete<keyof HTMLElementTagNameMap>;
