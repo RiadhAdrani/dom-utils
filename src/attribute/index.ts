@@ -1,4 +1,5 @@
-import { DomAttribute } from "../types";
+import { isArray } from "@riadh-adrani/utility-js";
+import { Arrayable, DomAttribute } from "../types";
 
 export const togglableAttributes = [
   "contenteditable",
@@ -65,12 +66,26 @@ export const toggleAttribute = (attribute: string, element: Element, value?: boo
  * @param value value
  * @param element target element
  */
-export const setAttribute = (attribute: string, value: DomAttribute, element: Element): void => {
+export const setAttribute = (
+  attribute: string,
+  value: Arrayable<DomAttribute>,
+  element: Element
+): void => {
   if (togglableAttributes.includes(attribute)) {
     toggleAttribute(attribute, element, value as boolean);
   } else {
-    element.setAttribute(attribute, value as string);
-    (element as any)[attribute] = value;
+    let $value: DomAttribute = "";
+
+    if (isArray(value)) {
+      $value = (value as Array<DomAttribute>).join(" ");
+    } else {
+      $value = value as DomAttribute;
+    }
+
+    element.setAttribute(attribute, $value as string);
+
+    // TODO does not work for attributes like class : className should be set instead.
+    (element as any)[attribute] = $value;
   }
 };
 

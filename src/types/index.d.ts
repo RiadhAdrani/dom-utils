@@ -21,7 +21,7 @@ export type DomNamespace =
   | "http://www.w3.org/1998/Math/MathML";
 
 export type DomElementOptions<E = Element> = {
-  attributes?: Record<string, DomAttribute>;
+  attributes?: Record<string, Arrayable<DomAttribute>>;
   events?: Record<string, DomEventHandler<E>>;
   children?: Arrayable<DomChild>;
   namespace?: DomNamespace;
