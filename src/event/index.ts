@@ -1,3 +1,5 @@
+import { DomEvent, DomEventHandler } from "../types";
+
 /**
  * check if the given name is an event name.
  * - `onclick` or `oninput` are valid.
@@ -23,7 +25,11 @@ export const isOnEventName = (name: string): boolean => {
  * @param callback callback
  * @param element target element
  */
-export const setEvent = <T = Event>(name: string, callback: (e: T) => void, element: Element) => {
+export const setEvent = <T = Event, E = Element>(
+  name: string,
+  callback: DomEventHandler<E, T>,
+  element: Element
+) => {
   if (element instanceof Element === false) return;
   if (typeof callback !== "function") return;
 

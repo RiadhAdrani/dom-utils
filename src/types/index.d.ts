@@ -28,3 +28,5 @@ export type DomElementOptions<E = Element> = {
 };
 
 export type DomElementTagName = StringWithAutoComplete<keyof HTMLElementTagNameMap>;
+
+export type DomElementEventName = StringWithAutoComplete<`on${keyof DocumentEventMap}`>;

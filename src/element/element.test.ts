@@ -150,7 +150,7 @@ describe("Element", () => {
   it("should returns element index", () => {
     const el = createElement("div");
 
-    const parent = createElement("div", { children: [el] });
+    createElement("div", { children: [el] });
 
     expect(getElementPosition(el)).toBe(0);
   });
