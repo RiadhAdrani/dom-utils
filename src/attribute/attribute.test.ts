@@ -3,53 +3,53 @@ import { setAttribute, removeAttribute, toggleAttribute } from ".";
 import { createElement } from "../element";
 
 it.each([
-    ["class", "test"],
-    ["id", "test"],
-    ["data-tooltip", "hello"],
-    ["height", 50],
+  ["class", "test"],
+  ["id", "test"],
+  ["data-tooltip", "hello"],
+  ["height", 50],
 ])("should inject attribute : '%s'", (attribute, value) => {
-    const el = createElement("input", { attributes: { type: "checkbox" } });
+  const el = createElement("input", { attributes: { type: "checkbox" } });
 
-    setAttribute(attribute, value as string, el);
+  setAttribute(attribute, value as string, el);
 
-    expect(el.getAttribute(attribute)).toBe(value.toString());
+  expect(el.getAttribute(attribute)).toBe(value.toString());
 });
 
 it.each([["checked"], ["contenteditable"], ["disabled"]])(
-    "should inject 'toggle' attribute : '%s'",
-    (attr) => {
-        const el = createElement("input", { attributes: { type: "checkbox" } });
+  "should inject 'toggle' attribute : '%s'",
+  (attr) => {
+    const el = createElement("input", { attributes: { type: "checkbox" } });
 
-        toggleAttribute(attr, el);
+    toggleAttribute(attr, el);
 
-        expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeTruthy();
+    expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeTruthy();
 
-        toggleAttribute(attr, el);
+    toggleAttribute(attr, el);
 
-        expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeFalsy();
-    }
+    expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeFalsy();
+  }
 );
 
 it.each([
-    ["checked", false],
-    ["contenteditable", true],
-    ["disabled", true],
+  ["checked", false],
+  ["contenteditable", true],
+  ["disabled", true],
 ])("should check if an attribute is toggled on or off : '%s'", (attr, value) => {
-    const el = createElement("input", { attributes: { type: "checkbox", [attr]: value } });
+  const el = createElement("input", { attributes: { type: "checkbox", [attr]: value } });
 
-    expect((el as any)[attr]).toBe(value);
+  expect((el as any)[attr]).toBe(value);
 });
 
 it.each([
-    ["class", "test"],
-    ["id", "test"],
-    ["data-tooltip", "hello"],
+  ["class", "test"],
+  ["id", "test"],
+  ["data-tooltip", "hello"],
 ])("should remove attribute : '%s'", (attribute, value) => {
-    const el = createElement("input", { attributes: { type: "checkbox" } });
+  const el = createElement("input", { attributes: { type: "checkbox" } });
 
-    setAttribute(attribute, value, el);
+  setAttribute(attribute, value, el);
 
-    removeAttribute(attribute, el);
+  removeAttribute(attribute, el);
 
-    expect(el.getAttribute(attribute)).toBe(null);
+  expect(el.getAttribute(attribute)).toBe(null);
 });

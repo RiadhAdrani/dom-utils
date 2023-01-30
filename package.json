@@ -1,35 +1,34 @@
 {
-    "name": "@riadh-adrani/dom-control-js",
-    "version": "1.0.5",
-    "description": "",
-    "main": "build/index.js",
-    "scripts": {
-        "test": "jest",
-        "test-watch": "jest --watch",
-        "build": "rm -rf build && tsc",
-        "prepare": "npm run test && npm run build"
-    },
-    "keywords": [
-        "dom",
-        "control",
-        "js",
-        "riadh",
-        "adrani",
-        "ts"
-    ],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@types/node": "^18.11.4",
-        "jest": "^29.2.1",
-        "jest-environment-jsdom": "^29.2.1",
-        "ts-jest": "^29.0.3",
-        "typescript": "^4.8.4"
-    },
-    "dependencies": {
-        "@riadh-adrani/utility-js": "^0.20.1"
-    },
-    "files": [
-        "build/**/*"
-    ]
+  "name": "@riadh-adrani/dom-control-js",
+  "version": "1.0.6",
+  "description": "",
+  "main": "build/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "up": "npm run test && rm -rf build && tsc"
+  },
+  "keywords": [
+    "dom",
+    "control",
+    "js",
+    "riadh",
+    "adrani",
+    "ts"
+  ],
+  "author": "riadh-adrani",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.4",
+    "jest": "^29.2.1",
+    "jest-environment-jsdom": "^29.2.1",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@riadh-adrani/utility-js": "^0.31.0"
+  },
+  "files": [
+    "build/**/*"
+  ]
 }

@@ -6,15 +6,15 @@
  * @param name event name
  */
 export const isOnEventName = (name: string): boolean => {
-    if (typeof name !== "string") return false;
+  if (typeof name !== "string") return false;
 
-    const onEventRegex = /on[a-z]{1,}/;
+  const onEventRegex = /on[a-z]{1,}/;
 
-    if (!onEventRegex.test(name)) {
-        return false;
-    }
+  if (!onEventRegex.test(name)) {
+    return false;
+  }
 
-    return true;
+  return true;
 };
 
 /**
@@ -23,15 +23,15 @@ export const isOnEventName = (name: string): boolean => {
  * @param callback callback
  * @param element target element
  */
-export const setEvent = (name: string, callback: (e: Event) => void, element: Element) => {
-    if (element instanceof Element === false) return;
-    if (typeof callback !== "function") return;
+export const setEvent = <T = Event>(name: string, callback: (e: T) => void, element: Element) => {
+  if (element instanceof Element === false) return;
+  if (typeof callback !== "function") return;
 
-    if (!isOnEventName(name)) {
-        return;
-    }
+  if (!isOnEventName(name)) {
+    return;
+  }
 
-    (element as Record<string, any>)[name] = callback;
+  (element as Record<string, any>)[name] = callback;
 };
 
 /**
@@ -40,11 +40,11 @@ export const setEvent = (name: string, callback: (e: Event) => void, element: El
  * @param element target element
  */
 export const removeEvent = (name: string, element: Element) => {
-    if (element instanceof Element === false) return;
+  if (element instanceof Element === false) return;
 
-    if (!isOnEventName(name)) {
-        return;
-    }
+  if (!isOnEventName(name)) {
+    return;
+  }
 
-    (element as any)[name] = null;
+  (element as any)[name] = null;
 };

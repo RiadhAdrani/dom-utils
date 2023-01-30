@@ -1,25 +1,27 @@
+import { DomAttribute } from "../types";
+
 export const togglableAttributes = [
-    "contenteditable",
-    "autofocus",
-    "autoplay",
-    "allowfullscreen",
-    "allowpaymentreques",
-    "checked",
-    "controls",
-    "compact",
-    "disabled",
-    "hidden",
-    "ismap",
-    "loop",
-    "multiple",
-    "muted",
-    "open",
-    "playsinline",
-    "readonly",
-    "required",
-    "selected",
-    "async",
-    "defer",
+  "contenteditable",
+  "autofocus",
+  "autoplay",
+  "allowfullscreen",
+  "allowpaymentreques",
+  "checked",
+  "controls",
+  "compact",
+  "disabled",
+  "hidden",
+  "ismap",
+  "loop",
+  "multiple",
+  "muted",
+  "open",
+  "playsinline",
+  "readonly",
+  "required",
+  "selected",
+  "async",
+  "defer",
 ];
 
 /**
@@ -27,7 +29,7 @@ export const togglableAttributes = [
  * @param attribute attribute name
  */
 export const isTogglableAttribute = (attribute: string): boolean => {
-    return togglableAttributes.includes(attribute.trim());
+  return togglableAttributes.includes(attribute.trim());
 };
 
 /**
@@ -39,7 +41,7 @@ export const isTogglableAttribute = (attribute: string): boolean => {
  * @param element target element
  */
 export const isToggledOn = (attribute: string, element: Element): boolean => {
-    return isTogglableAttribute(attribute) && (element as any)[attribute] === true;
+  return isTogglableAttribute(attribute) && (element as any)[attribute] === true;
 };
 
 /**
@@ -49,12 +51,12 @@ export const isToggledOn = (attribute: string, element: Element): boolean => {
  * @param element target element
  */
 export const toggleAttribute = (attribute: string, element: Element, value?: boolean): void => {
-    if (value !== undefined) {
-        element.toggleAttribute(attribute, value === true);
-        (element as any)[attribute] = value === true;
-    } else {
-        element.toggleAttribute(attribute);
-    }
+  if (value !== undefined) {
+    element.toggleAttribute(attribute, value === true);
+    (element as any)[attribute] = value === true;
+  } else {
+    element.toggleAttribute(attribute);
+  }
 };
 
 /**
@@ -63,17 +65,13 @@ export const toggleAttribute = (attribute: string, element: Element, value?: boo
  * @param value value
  * @param element target element
  */
-export const setAttribute = (
-    attribute: string,
-    value: string | boolean,
-    element: Element
-): void => {
-    if (togglableAttributes.includes(attribute)) {
-        toggleAttribute(attribute, element, value as boolean);
-    } else {
-        element.setAttribute(attribute, value as string);
-        (element as any)[attribute] = value;
-    }
+export const setAttribute = (attribute: string, value: DomAttribute, element: Element): void => {
+  if (togglableAttributes.includes(attribute)) {
+    toggleAttribute(attribute, element, value as boolean);
+  } else {
+    element.setAttribute(attribute, value as string);
+    (element as any)[attribute] = value;
+  }
 };
 
 /**
@@ -82,9 +80,9 @@ export const setAttribute = (
  * @param element target element
  */
 export const removeAttribute = (attribute: string, element: Element): void => {
-    if (isTogglableAttribute(attribute)) {
-        toggleAttribute(attribute, element, false);
-    } else {
-        element.removeAttribute(attribute);
-    }
+  if (isTogglableAttribute(attribute)) {
+    toggleAttribute(attribute, element, false);
+  } else {
+    element.removeAttribute(attribute);
+  }
 };
