@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "next dev",
     "build:docs": "next build && next export",
-    "preview": "next out",
     "test": "jest",
     "up": "clear && npm run test && rm -rf build && tsc && npm publish"
   },
