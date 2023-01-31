@@ -7,7 +7,7 @@ import { DomChild, DomElementOptions, DomTagName } from "../types";
  * Check if the given element is a text node.
  * @param object target
  */
-export const isTextNode = (object: any): boolean => {
+export const isTextNode = (object: unknown): boolean => {
   return object instanceof Text;
 };
 
@@ -16,7 +16,7 @@ export const isTextNode = (object: any): boolean => {
  Check if the given object is an HTML element.
  * @param object target 
  */
-export const isElement = (object: any): boolean => {
+export const isElement = (object: unknown): boolean => {
   return object instanceof Element;
 };
 
@@ -47,7 +47,7 @@ export const setTextNodeData = (textNode: Text, data: string) => {
 export const createElement = <T = Element>(tag: DomTagName, params?: DomElementOptions): T => {
   if (isBlank(tag)) throw new Error("tag cannot be empty.");
 
-  const ns = params && params.namespace ? params.namespace : "http://www.w3.org/1999/xhtml";
+  const ns = params?.namespace ?? "http://www.w3.org/1999/xhtml";
 
   const el = document.createElementNS(ns, tag);
 
@@ -59,7 +59,7 @@ export const createElement = <T = Element>(tag: DomTagName, params?: DomElementO
 
   if (params && params.events) {
     Object.keys(params.events as object).forEach((key) => {
-      setEvent(key, params.events!![key], el);
+      setEvent(key, params.events!![key], el as HTMLElement);
     });
   }
 
@@ -108,11 +108,11 @@ export const injectNode = (element: DomChild, parent: Element, index?: number): 
  * @param element target
  * @param parentElement container
  */
-export const isElementWithinElement = (element: any, parentElement: Element): boolean => {
+export const isElementWithinElement = (element: unknown, parentElement: Element): boolean => {
   if (element instanceof Node === false) return false;
   if (!isElement(parentElement)) return false;
 
-  return parentElement.contains(element);
+  return parentElement.contains(element as any);
 };
 
 /**

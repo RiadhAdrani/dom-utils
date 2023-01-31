@@ -1,0 +1,94 @@
+# Types
+
+Library's types.
+
+---
+
+### `Arrayable`
+
+```ts
+type Arrayable<T> = T | Array<T>;
+```
+
+---
+
+### `DomAttribute`
+
+```ts
+type DomAttribute = string | boolean | Record<string, unknown> | undefined | null;
+```
+
+---
+
+### `DomEventTarget`
+
+```ts
+export type DomEventTarget<C = HTMLElement> = EventTarget & C;
+```
+
+---
+
+### `DomEvent`
+
+```ts
+type DomEvent<E = Event, C = HTMLElement> = E & {
+  target: DomEventTarget<HTMLElement>;
+  currentTarget: DomEventTarget<C>;
+};
+```
+
+---
+
+### `DomEventHandler`
+
+```ts
+type DomEventHandler<El = HTMLElement, Ev = Event> = (event: DomEvent<Ev, El>) => void;
+```
+
+---
+
+### `DomChild`
+
+```ts
+type DomChild = string | number | null | undefined | Element | Text;
+```
+
+---
+
+### `DomNamespace`
+
+```ts
+type DomNamespace =
+  | "http://www.w3.org/2000/svg"
+  | "http://www.w3.org/1999/xhtml"
+  | "http://www.w3.org/1998/Math/MathML";
+```
+
+---
+
+### `DomElementOptions`
+
+```ts
+type DomElementOptions = {
+  attributes?: Record<string, Arrayable<DomAttribute>>;
+  events?: Record<string, DomEventHandler>;
+  children?: Arrayable<DomChild>;
+  namespace?: DomNamespace;
+};
+```
+
+---
+
+### `DomTagName`
+
+```ts
+type DomTagName = StringWithAutoComplete<keyof HTMLElementTagNameMap>;
+```
+
+---
+
+### `DomEventName`
+
+```ts
+type DomEventName = StringWithAutoComplete<`on${keyof DocumentEventMap}`>;
+```

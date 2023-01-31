@@ -1,0 +1,73 @@
+# Attributes
+
+Handle element's attributes.
+
+---
+
+### `isToggleAttribute`
+
+return if the given attribute is a standard togglable one.
+
+```ts
+function isToggleAttribute(attribute: string): boolean;
+```
+
+- `attribute` : name of the attribute.
+
+---
+
+### `isToggledOn`
+
+check if a given attributes is toggled on.
+
+> If a non-standard toggleable attribute name is provided, it will return false;
+
+```ts
+function isToggledOn(attribute: string, element: Element): boolean;
+```
+
+- `attribute` : name of the attribute.
+- `element` : target element.
+
+---
+
+### `toggleAttribute`
+
+toggle the given attribute.
+
+```ts
+function toggleAttribute(attribute: string, element: Element, value?: boolean): void;
+```
+
+- `attribute` : name of the attribute.
+- `element` : target element.
+- `value` : optional, used to force a value.
+
+---
+
+### `setAttribute`
+
+set the value of an element's attribute with the given name.
+
+```ts
+function setAttribute(attribute: string, value: Arrayable<DomAttribute>, element: Element): void;
+```
+
+- `attribute` : name of the attribute.
+- `value` : attribute value.
+- `element` : target element.
+
+See also: [Arrayable](types/#arrayable), [DomAttribute](types/#domattribute)
+
+---
+
+### `removeAttribute`
+
+remove the element's attribute with the given name.
+
+```ts
+function removeAttribute(attribute: string, element: Element): void;
+```
+
+- `attribute` : name of the attribute.
+- `element` : target element.

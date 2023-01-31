@@ -115,7 +115,7 @@ export const setAttribute = (
 };
 
 /**
- * remove the element's attribute with the given ame.
+ * remove the element's attribute with the given name.
  * @param attribute name
  * @param element target element
  */

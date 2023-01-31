@@ -1,4 +1,4 @@
-import { DomEvent, DomEventHandler } from "../types";
+import { DomEventHandler } from "../types";
 
 /**
  * check if the given name is an event name.
@@ -28,7 +28,7 @@ export const isOnEventName = (name: string): boolean => {
 export const setEvent = <T = Event, E = Element>(
   name: string,
   callback: DomEventHandler<E, T>,
-  element: Element
+  element: E
 ) => {
   if (element instanceof Element === false) return;
   if (typeof callback !== "function") return;
@@ -41,7 +41,7 @@ export const setEvent = <T = Event, E = Element>(
 };
 
 /**
- * remove given element named event.
+ * removes given element named event.
  * @param name event name.
  * @param element target element
  */

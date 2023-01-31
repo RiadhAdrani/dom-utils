@@ -1,0 +1,183 @@
+# Element
+
+Create and manipulate DOM elements.
+
+---
+
+### `isTextNode`
+
+Check if the given element is a text node.
+
+```ts
+function isTextNode(object: unknown): boolean;
+```
+
+- `object` : element to be checked.
+
+---
+
+### `isElement`
+
+Check if the given object is an HTML element.
+
+```ts
+function isElement(object: unknown): boolean;
+```
+
+- `object` : element to be checked.
+
+---
+
+### `createTextNode`
+
+Create and return a text node with the given data.
+
+```ts
+function createTextNode(data: string): Text;
+```
+
+- `data` : text.
+
+---
+
+### `setTextNodeData`
+
+Update the content of a text node.
+
+```ts
+function setTextNodeData(textNode: Text, data: string): void;
+```
+
+- `textNode` : target node.
+- `data` : text.
+
+---
+
+### `createElement`
+
+Create an element with the given options.
+
+```ts
+function setTextNodeData<T = Element>(tag: DomTagName, params?: DomElementOptions): T;
+```
+
+- `tag` : element tag name.
+- `params` : element options.
+
+> throws an error if the tag is empty.
+
+---
+
+### `injectNode`
+
+Insert an element within a container in a given position.
+
+```ts
+function injectNode(element: DomChild, parent: Element, index?: number): void;
+```
+
+- `element` : element to be injected.
+- `parent` : containing element.
+- `number` : the index in which the element will be injected. if the index is larger than the number of the parent's children or is negative, it will be injected at the end.
+
+---
+
+### `isElementWithinElement`
+
+Check if the given element is container within the parent element.
+
+```ts
+function isElementWithinElement(element: unknown, parentElement: Element): boolean;
+```
+
+- `element` : target element.
+- `parent` : containing element.
+
+---
+
+### `isElementWithinDocument`
+
+Check if the body of the document contains the given element.
+
+```ts
+function isElementWithinDocument(element: unknown): boolean;
+```
+
+- `element` : target element.
+
+---
+
+### `getElementPosition`
+
+Return the index of the given element inside its parent container, or -1 otherwise.
+
+```ts
+function getElementPosition(element: Element): number;
+```
+
+- `element` : target element.
+
+---
+
+### `getElementChildrenCount`
+
+Retrieve the number of children within the given element. If `element` is not of type `Element`, -1 will be returned instead.
+
+Note that `Text` nodes are not considered as element children.
+
+```ts
+function getElementChildrenCount(element: Element): number;
+```
+
+- `element` : target element.
+
+---
+
+### `removeChildAtPosition`
+
+removes the element's children at the given position and return it if it exists, else it return `false`.
+
+```ts
+function removeChildAtPosition(element: Element, position: number): ChildNode | false;
+```
+
+- `element` : target element.
+- `position` : child index.
+
+---
+
+### `changeChildPosition`
+
+Change the position of the given element inside its parent. if the element is not of type `Element` or does not has a parent, the function will exit.
+
+```ts
+function removeChildAtPosition(element: Element, newPosition: number): void;
+```
+
+- `element` : target element.
+- `newPosition` : new position.
+
+---
+
+### `removeNode`
+
+Remove the given node
+
+```ts
+function removeNode(node: Element | Text): void;
+```
+
+- `node` : target element.
+
+---
+
+### `replaceNodeWith`
+
+Replace the given element with the new one.
+
+```ts
+function replaceNodeWith(node: Element | Text, new Element: Element | Text): void;
+```
+
+- `element` : target element.
+- `newElement` : new element.

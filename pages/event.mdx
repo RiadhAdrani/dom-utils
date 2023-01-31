@@ -1,0 +1,56 @@
+# Events
+
+Handle elemen's events.
+
+---
+
+### `isOnEventName`
+
+Check if the given name is valid event name.
+
+> `onclick` is valid.
+
+> `click` is not valid.
+
+```ts
+function isOnEventName(name: string): boolean;
+```
+
+- `name` : name of the event.
+
+---
+
+### `setEvent`
+
+Add an event with the given name to the target element.
+
+Behind the scene, we don't add an event listener using `element.addEventListener`, we just override the value of `on<event>`.
+
+```ts
+function setEvent<T = Event, E = Element>(
+  name: string,
+  callback: DomEventHandler<E, T>,
+  element: E
+): void;
+```
+
+- `name` : event's name.
+- `callback` : callback.
+- `element` : target element.
+
+See also: [DomEventHandler](types/#domeventhandler)
+
+---
+
+### `removeEvent`
+
+Removes given element named event.
+
+```ts
+function removeEvent(name: string, element: Element): void;
+```
+
+- `name` : event's name.
+- `element` : target element.
+
+See also: [DomEventHandler](types/#domeventhandler)

@@ -2,8 +2,6 @@ import { StringWithAutoComplete } from "@riadh-adrani/utility-js";
 
 export type Arrayable<T> = T | Array<T>;
 
-export type PartialRecord<K extends keyof any, V> = { [P in K]?: V };
-
 export type DomAttribute = string | boolean | Record<string, unknown> | undefined | null;
 
 export type DomEventTarget<C = HTMLElement> = EventTarget & C;

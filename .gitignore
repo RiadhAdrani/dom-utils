@@ -2,3 +2,5 @@ node_modules
 .vscode
 /lib
 /build
+/out
+.next
