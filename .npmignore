@@ -5,3 +5,6 @@ tslint.json
 .next
 .vscode
 pages
+out
+theme.config.jsx
+next.config.js
