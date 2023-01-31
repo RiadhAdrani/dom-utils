@@ -1,5 +1,6 @@
-import { isArray } from "@riadh-adrani/utility-js";
+import { hasProperty, isArray, isObject } from "@riadh-adrani/utility-js";
 import { Arrayable, DomAttribute } from "../types";
+import camelCase from "camelcase";
 
 export const togglableAttributes = [
   "contenteditable",
@@ -76,17 +77,40 @@ export const setAttribute = (
   } else {
     let $value: DomAttribute = "";
 
+    if (isObject(value) && !isArray(value)) {
+      Object.keys(value as Record<string, unknown>).forEach((key: string) => {
+        const $v = (value as Record<string, string>)[key];
+
+        const $computed = isArray($v) ? ($v as unknown as Array<string>).join(" ") : $v;
+
+        switch (attribute) {
+          case "dataset": {
+            setAttribute(`data-${key}`, $computed, element);
+            break;
+          }
+          case "style": {
+            ((element as HTMLElement).style as unknown as Record<string, string>)[key] = $computed;
+            break;
+          }
+        }
+      });
+
+      return;
+    }
+
     if (isArray(value)) {
       $value = (value as Array<DomAttribute>).join(" ");
     } else {
       $value = value as DomAttribute;
     }
 
-    // TODO we need to check if attribute is prefixed with data-, or if attribute is dataset and is Record<string,any>
     element.setAttribute(attribute, $value as string);
 
-    // TODO does not work for attributes like class : className should be set instead.
-    (element as any)[attribute] = $value;
+    if (attribute === "class") {
+      (element as any)["className"] = $value;
+    } else {
+      (element as any)[camelCase(attribute)] = $value;
+    }
   }
 };
 

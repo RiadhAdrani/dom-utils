@@ -1,7 +1,7 @@
 import { isBlank } from "@riadh-adrani/utility-js";
 import { setAttribute } from "../attribute";
 import { setEvent } from "../event";
-import { DomChild, DomElementOptions, DomElementTagName } from "../types";
+import { DomChild, DomElementOptions, DomTagName } from "../types";
 
 /**
  * Check if the given element is a text node.
@@ -44,10 +44,7 @@ export const setTextNodeData = (textNode: Text, data: string) => {
  * @param tag existing or custom tag.
  * @param params element options
  */
-export const createElement = <T = Element>(
-  tag: DomElementTagName,
-  params?: DomElementOptions
-): T => {
+export const createElement = <T = Element>(tag: DomTagName, params?: DomElementOptions): T => {
   if (isBlank(tag)) throw new Error("tag cannot be empty.");
 
   const ns = params && params.namespace ? params.namespace : "http://www.w3.org/1999/xhtml";
