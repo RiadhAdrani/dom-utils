@@ -1,6 +1,6 @@
-import { hasProperty, isArray, isObject } from "@riadh-adrani/utility-js";
+import { isArray, isObject } from "@riadh-adrani/utility-js";
 import { Arrayable, DomAttribute } from "../types";
-import camelCase from "camelcase";
+import _ from "lodash";
 
 export const togglableAttributes = [
   "contenteditable",
@@ -109,7 +109,7 @@ export const setAttribute = (
     if (attribute === "class") {
       (element as any)["className"] = $value;
     } else {
-      (element as any)[camelCase(attribute)] = $value;
+      (element as any)[_.camelCase(attribute)] = $value;
     }
   }
 };
