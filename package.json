@@ -1,16 +1,15 @@
 {
   "name": "@riadh-adrani/dom-control-js",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "build/index.js",
   "type": "module",
-  "types": "./build/index.d.ts",
+  "types": "build/index.d.ts",
   "scripts": {
     "dev": "next dev",
-    "build:docs": "next build && next export",
     "test": "jest",
-    "build:lib": "rm -rf build && rm -rf out && tsc",
-    "up": "npm run test && rm -rf build && tsc && npm publish"
+    "build:docs": "next build && next export",
+    "build:lib": "npm run test && rm -rf build && rm -rf out && tsc"
   },
   "keywords": [
     "dom",
