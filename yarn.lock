@@ -894,11 +894,6 @@
   resolved "https://registry.yarnpkg.com/@types/katex/-/katex-0.11.1.tgz#34de04477dcf79e2ef6c8d23b41a3d81f9ebeaf5"
   integrity sha512-DUlIj2nk0YnJdlWgsFuVKcX27MLW0KbKmGVoUHmFr+74FYYNUDAaj9ZqTADvsbE8rfxuVmSFc7KczYn5Y09ozg==
 
-"@types/lodash@^4.14.191":
-  version "4.14.191"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
-  integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
-
 "@types/mdast@^3.0.0":
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@types/mdast/-/mdast-3.0.10.tgz#4724244a82a4598884cbbe9bcfd73dff927ee8af"
@@ -2677,11 +2672,6 @@ lodash.memoize@4.x:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==
 
-lodash@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
 longest-streak@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/longest-streak/-/longest-streak-3.1.0.tgz#62fa67cd958742a1574af9f39866364102d90cd4"
@@ -3433,11 +3423,6 @@ next@^13.1.6:
     "@next/swc-win32-arm64-msvc" "13.1.6"
     "@next/swc-win32-ia32-msvc" "13.1.6"
     "@next/swc-win32-x64-msvc" "13.1.6"
-
-nextjs@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/nextjs/-/nextjs-0.0.3.tgz#4f4d1d6a257be920d9b9649d4d9522c724a4e543"
-  integrity sha512-mYbDUo4/sRAZ8TqK63PCpYnFiLg7BICG/ot9+guOrUKd4/Fo71ZmEQ41IZbH6nqbQvG7SXTBuofJXAIWfNho0w==
 
 nextra-theme-docs@^2.2.14:
   version "2.2.14"

@@ -1,6 +1,6 @@
 {
   "name": "@riadh-adrani/dom-control-js",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "",
   "main": "build/index.js",
   "type": "module",
@@ -22,7 +22,6 @@
   "author": "riadh-adrani",
   "license": "ISC",
   "devDependencies": {
-    "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.4",
     "jest": "^29.2.1",
     "jest-environment-jsdom": "^29.2.1",
@@ -36,8 +35,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@riadh-adrani/utility-js": "^0.31.0",
-    "lodash": "^4.17.21"
+    "@riadh-adrani/utility-js": "^0.31.0"
   },
   "files": [
     "build/**/*"

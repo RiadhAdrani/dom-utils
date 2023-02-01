@@ -1,6 +1,5 @@
-import { isArray, isObject } from "@riadh-adrani/utility-js";
+import { isArray, isObject, capitalize } from "@riadh-adrani/utility-js";
 import { Arrayable, DomAttribute } from "../types";
-import _ from "lodash";
 
 export const togglableAttributes = [
   "contenteditable",
@@ -109,7 +108,12 @@ export const setAttribute = (
     if (attribute === "class") {
       (element as any)["className"] = $value;
     } else {
-      (element as any)[_.camelCase(attribute)] = $value;
+      const $attr = attribute
+        .split("-")
+        .map((t, i) => (i !== 0 ? capitalize(t) : t))
+        .join("");
+
+      (element as any)[$attr] = $value;
     }
   }
 };
