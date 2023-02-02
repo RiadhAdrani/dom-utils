@@ -1,13 +1,16 @@
 {
   "name": "@riadh-adrani/dom-control-js",
   "version": "1.0.11",
-  "description": "",
+  "description": "Utility functions to create and manipulate elements in the DOM.",
   "main": "build/index.js",
-  "type": "module",
   "types": "build/index.d.ts",
+  "type": "module",
+  "files": [
+    "build/**/*"
+  ],
   "scripts": {
-    "dev": "next dev",
     "test": "jest",
+    "dev:docs": "next dev",
     "build:docs": "next build && next export",
     "build:lib": "npm run test && rm -rf build && rm -rf out && tsc"
   },
@@ -36,8 +39,5 @@
   },
   "dependencies": {
     "@riadh-adrani/utility-js": "^0.31.0"
-  },
-  "files": [
-    "build/**/*"
-  ]
+  }
 }
