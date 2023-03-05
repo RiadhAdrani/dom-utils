@@ -1,10 +1,9 @@
 {
   "name": "@riadh-adrani/dom-control-js",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "type": "module",
   "files": [
     "build/**/*"
   ],
