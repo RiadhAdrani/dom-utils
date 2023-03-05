@@ -10,7 +10,7 @@ import { DomEventHandler } from "../types";
 export const isOnEventName = (name: string): boolean => {
   if (typeof name !== "string") return false;
 
-  const onEventRegex = /(on|On)[a-z]{1,}/;
+  const onEventRegex = /(on)[a-zA-Z]{1,}/;
 
   if (!onEventRegex.test(name)) {
     return false;

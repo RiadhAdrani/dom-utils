@@ -22,6 +22,13 @@ describe("Event", () => {
       },
       1,
     ],
+    [
+      "onClick",
+      () => {
+        count++;
+      },
+      1,
+    ],
   ])("should add click event", (event, callback, expected) => {
     const el = createElement<HTMLElement>("div");
 
