@@ -1,6 +1,6 @@
 {
   "name": "@riadh-adrani/dom-control-js",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -38,6 +38,6 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@riadh-adrani/utility-js": "^0.31.0"
+    "@riadh-adrani/utils": "^0.35.0"
   }
 }

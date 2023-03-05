@@ -1,12 +1,11 @@
 {
   "exclude": ["node_modules", "src/**/*.test.ts", "./**.config.js", "./**.config.jsx", "out"],
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2016",
     "lib": ["es6", "dom"],
-    "module": "ES2015",
+    "module": "commonjs",
     "rootDir": ".",
-    "resolveJsonModule": false,
-    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "allowJs": true,
     "declaration": true,
     "outDir": "build",

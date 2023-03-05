@@ -1,4 +1,4 @@
-import { isBlank } from "@riadh-adrani/utility-js";
+import { isBlank } from "@riadh-adrani/utils";
 import { setAttribute } from "../attribute";
 import { setEvent } from "../event";
 import { DomChild, DomElementOptions, DomTagName } from "../types";

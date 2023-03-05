@@ -1,4 +1,4 @@
-import { isArray, isObject, capitalize } from "@riadh-adrani/utility-js";
+import { isArray, isObject, capitalize } from "@riadh-adrani/utils";
 import { Arrayable, DomAttribute } from "../types";
 
 export const togglableAttributes = [

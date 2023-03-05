@@ -10,7 +10,7 @@ import { DomEventHandler } from "../types";
 export const isOnEventName = (name: string): boolean => {
   if (typeof name !== "string") return false;
 
-  const onEventRegex = /on[a-z]{1,}/;
+  const onEventRegex = /(on|On)[a-z]{1,}/;
 
   if (!onEventRegex.test(name)) {
     return false;
@@ -37,7 +37,7 @@ export const setEvent = <T = Event, E = Element>(
     return;
   }
 
-  (element as Record<string, any>)[name] = callback;
+  (element as Record<string, any>)[name.toLocaleLowerCase()] = callback;
 };
 
 /**

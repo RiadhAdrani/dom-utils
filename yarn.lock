@@ -747,10 +747,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@riadh-adrani/utility-js@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@riadh-adrani/utility-js/-/utility-js-0.31.0.tgz#c9316194bde04b95bfc338a10c1ad2fadfc5fb28"
-  integrity sha512-bMCTBQbuzAABU9b4wqefCUWXiwG93v1fIANvJrbzIGJl0Nf8umcVLsyJPn2IDg2Imktm4r67cRxprGLawvmOyQ==
+"@riadh-adrani/utils@^0.35.0":
+  version "0.35.0"
+  resolved "https://registry.yarnpkg.com/@riadh-adrani/utils/-/utils-0.35.0.tgz#b5476bfd686d57e7d1de71128b3cb37fc2d1960a"
+  integrity sha512-yUqkUaJnEwl4QQBQCAiuSJbaN5JriFX7omZxSohoKkS0XHwMcwavMfdzfF/xtFPO5Z/5Hhv/XY5qjxvwKyemrg==
 
 "@sinclair/typebox@^0.25.16":
   version "0.25.21"
