@@ -1,7 +1,7 @@
-import { expect, it, beforeEach, describe } from "@jest/globals";
+import { expect, it, beforeEach, describe, jest } from "@jest/globals";
 import { removeEvent, setEvent } from ".";
 import { createElement } from "../element";
-import { DomEvent, DomEventHandler } from "../types";
+import { DomEventHandler } from "../types";
 
 describe("Event", () => {
   beforeEach(() => {
@@ -36,6 +36,30 @@ describe("Event", () => {
     el.click();
 
     expect(count).toBe(expected);
+  });
+
+  it("should add multi camel cased events (onContextMenu)", () => {
+    const el = createElement<HTMLElement>("div");
+
+    const fn = jest.fn();
+
+    setEvent("onContextMenu", fn, el);
+
+    el.dispatchEvent(new MouseEvent("contextmenu"));
+
+    expect(fn).toHaveBeenCalledTimes(1);
+  });
+
+  it("should add multi camel cased events (onMouseOver)", () => {
+    const el = createElement<HTMLElement>("div");
+
+    const fn = jest.fn();
+
+    setEvent("onMouseOver", fn, el);
+
+    el.dispatchEvent(new MouseEvent("mouseover"));
+
+    expect(fn).toHaveBeenCalledTimes(1);
   });
 
   it("should remove click event", () => {

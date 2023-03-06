@@ -10,8 +10,8 @@
   "scripts": {
     "test": "jest",
     "dev:docs": "next dev",
-    "build:docs": "next build && next export",
-    "build:lib": "npm run test && rm -rf build && rm -rf out && tsc"
+    "build:docs": "rm -rf out && next build && next export",
+    "build:lib": " rm -rf build && npm run test && rm -rf out && tsc"
   },
   "keywords": [
     "dom",
