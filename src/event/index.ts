@@ -24,6 +24,8 @@ export const isOnEventName = (name: string): boolean => {
 
 /**
  * add an event with the given name to the target element.
+ *
+ * removes the existing event listener.
  * @param name event name.
  * @param callback callback
  * @param element target element
@@ -45,6 +47,10 @@ export const setEvent = <T = Event, E = Element>(
 
   if (!(element as Record<string, any>)[eventStore]) {
     (element as Record<string, any>)[eventStore] = {};
+  }
+
+  if ((element as Record<string, any>)[eventStore][ev]) {
+    removeEvent(ev, element as Element);
   }
 
   (element as Record<string, any>)[eventStore][ev] = (e: DomEvent<T, E>) => callback(e);
@@ -69,5 +75,7 @@ export const removeEvent = (name: string, element: Element) => {
 
   const callback = (element as Record<string, any>)[eventStore][ev];
 
-  (element as Element).removeEventListener(listener, callback);
+  if (callback) {
+    (element as Element).removeEventListener(listener, callback);
+  }
 };

@@ -62,6 +62,21 @@ describe("Event", () => {
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
+  it("should replace event", () => {
+    const el = createElement<HTMLElement>("div");
+
+    const onClick = jest.fn();
+    const onClick2 = jest.fn();
+
+    setEvent("onClick", onClick, el);
+    setEvent("onClick", onClick2, el);
+
+    el.click();
+
+    expect(onClick).toHaveBeenCalledTimes(0);
+    expect(onClick2).toHaveBeenCalledTimes(1);
+  });
+
   it("should remove click event", () => {
     const el = createElement<HTMLElement>("div");
 
