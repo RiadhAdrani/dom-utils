@@ -9,10 +9,7 @@
   ],
   "compilerOptions": {
     "target": "es2016",
-    "lib": [
-      "es6",
-      "dom"
-    ],
+    "lib": ["es6", "dom"],
     "module": "commonjs",
     "rootDir": ".",
     "resolveJsonModule": true,
@@ -23,16 +20,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "incremental": true,
-    "moduleResolution": "node",
-    "isolatedModules": true,
-    "jsx": "preserve"
+    "skipLibCheck": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

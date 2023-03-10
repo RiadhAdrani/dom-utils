@@ -1,6 +1,6 @@
 {
-  "name": "@riadh-adrani/dom-control-js",
-  "version": "1.0.15",
+  "name": "@riadh-adrani/dom-utils",
+  "version": "1.0.0",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -11,7 +11,7 @@
     "test": "jest",
     "dev:docs": "next dev",
     "build:docs": "rm -rf out && next build && next export",
-    "build:lib": " rm -rf build && npm run test && rm -rf out && tsc"
+    "build:lib": "npm run test && rm -rf out && tsc"
   },
   "keywords": [
     "dom",
