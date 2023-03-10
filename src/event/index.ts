@@ -1,4 +1,7 @@
-import { DomEventHandler } from "../types";
+import { isFunction } from "@riadh-adrani/utils";
+import { DomEvent, DomEventHandler } from "../types";
+
+export const eventStore = "__dom_control_events__";
 
 /**
  * check if the given name is an event name.
@@ -31,13 +34,22 @@ export const setEvent = <T = Event, E = Element>(
   element: E
 ) => {
   if (element instanceof Element === false) return;
-  if (typeof callback !== "function") return;
+  if (!isFunction(callback)) return;
 
   if (!isOnEventName(name)) {
     return;
   }
 
-  (element as Record<string, any>)[name.toLocaleLowerCase()] = callback;
+  const ev = name.toLocaleLowerCase();
+  const listener = ev.slice(2);
+
+  if (!(element as Record<string, any>)[eventStore]) {
+    (element as Record<string, any>)[eventStore] = {};
+  }
+
+  (element as Record<string, any>)[eventStore][ev] = (e: DomEvent<T, E>) => callback(e);
+
+  (element as Element).addEventListener(listener, (element as Record<string, any>)[eventStore][ev]);
 };
 
 /**
@@ -52,5 +64,10 @@ export const removeEvent = (name: string, element: Element) => {
     return;
   }
 
-  (element as any)[name] = null;
+  const ev = name.toLocaleLowerCase();
+  const listener = ev.slice(2);
+
+  const callback = (element as Record<string, any>)[eventStore][ev];
+
+  (element as Element).removeEventListener(listener, callback);
 };
