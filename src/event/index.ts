@@ -1,4 +1,5 @@
 import { isFunction } from "@riadh-adrani/utils";
+import { isElement } from "../element";
 import { DomEvent, DomEventHandler } from "../types";
 
 export const eventStore = "__dom_control_events__";
@@ -30,15 +31,16 @@ export const isOnEventName = (name: string): boolean => {
  * @param callback callback
  * @param element target element
  */
-export const setEvent = <T = Event, E = Element>(
+export const setEvent = <T = Event, E extends Object = Element>(
   name: string,
   callback: DomEventHandler<E, T>,
-  element: E
+  element: E | Document
 ) => {
-  if (element instanceof Element === false) return;
-  if (!isFunction(callback)) return;
-
-  if (!isOnEventName(name)) {
+  if (
+    !(isElement(element) || element instanceof Document) ||
+    !isFunction(callback) ||
+    !isOnEventName(name)
+  ) {
     return;
   }
 
@@ -50,12 +52,15 @@ export const setEvent = <T = Event, E = Element>(
   }
 
   if ((element as Record<string, any>)[eventStore][ev]) {
-    removeEvent(ev, element as Element);
+    removeEvent(ev, element as unknown as Element);
   }
 
   (element as Record<string, any>)[eventStore][ev] = (e: DomEvent<T, E>) => callback(e);
 
-  (element as Element).addEventListener(listener, (element as Record<string, any>)[eventStore][ev]);
+  (element as unknown as Element).addEventListener(
+    listener,
+    (element as Record<string, any>)[eventStore][ev]
+  );
 };
 
 /**
@@ -63,10 +68,8 @@ export const setEvent = <T = Event, E = Element>(
  * @param name event name.
  * @param element target element
  */
-export const removeEvent = (name: string, element: Element) => {
-  if (element instanceof Element === false) return;
-
-  if (!isOnEventName(name)) {
+export const removeEvent = (name: string, element: unknown) => {
+  if (!(isElement(element) || element instanceof Document) || !isOnEventName(name)) {
     return;
   }
 

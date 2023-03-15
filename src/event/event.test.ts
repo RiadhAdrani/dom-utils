@@ -96,4 +96,25 @@ describe("Event", () => {
 
     expect(count).toBe(1);
   });
+
+  it("should add event listener to the document", () => {
+    const onClick = jest.fn();
+
+    setEvent("onClick", onClick, document);
+
+    document.body.click();
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("should add event listener to the document", () => {
+    const onClick = jest.fn();
+
+    setEvent("onClick", onClick, document);
+    removeEvent("onClick", document);
+
+    document.body.click();
+
+    expect(onClick).toHaveBeenCalledTimes(0);
+  });
 });
