@@ -1,6 +1,6 @@
 {
   "name": "@riadh-adrani/dom-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -37,6 +37,6 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@riadh-adrani/utils": "^0.36.1"
+    "@riadh-adrani/utils": "^0.37.0"
   }
 }

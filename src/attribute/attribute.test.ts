@@ -1,8 +1,17 @@
 import { expect, it, describe } from "@jest/globals";
-import { setAttribute, removeAttribute, toggleAttribute } from ".";
+import { setAttribute, removeAttribute, toggleAttribute, normalizeToDomProperty } from ".";
 import { createElement } from "../element";
 
 describe("Attribute", () => {
+  it.each([
+    ["contentEditable", "contentEditable"],
+    ["contenteditable", "contentEditable"],
+    ["ismap", "isMap"],
+    ["data-title", "data-title"],
+  ])("should normalize attribute", (attr, prop) => {
+    expect(normalizeToDomProperty(attr)).toBe(prop);
+  });
+
   it.each([
     ["class", "test"],
     ["id", "test"],
@@ -16,36 +25,36 @@ describe("Attribute", () => {
     expect(el.getAttribute(attribute)).toBe(value.toString());
   });
 
-  it.each([["checked"], ["contenteditable"], ["disabled"]])(
-    "should inject 'toggle' attribute : '%s'",
-    (attr) => {
-      const el = createElement("input", { attributes: { type: "checkbox" } });
-
-      toggleAttribute(attr, el);
-
-      expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeTruthy();
-
-      toggleAttribute(attr, el);
-
-      expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeFalsy();
-    }
-  );
-
   it.each([
-    ["checked", false],
-    ["contenteditable", true],
-    ["disabled", true],
-  ])("should check if an attribute is toggled on or off : '%s'", (attr, value) => {
-    const el = createElement("input", { attributes: { type: "checkbox", [attr]: value } });
+    ["checked", "checked"],
+    ["contenteditable", "contentEditable"],
+    ["disabled", "disabled"],
+  ])("should inject 'toggle' attribute : '%s'", (attr) => {
+    const el = createElement("input", { attributes: { type: "checkbox" } });
 
-    expect((el as any)[attr]).toBe(value);
+    toggleAttribute(attr, el);
+
+    expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeTruthy();
+
+    toggleAttribute(attr, el);
+
+    expect(Array.of(...el.getAttributeNames()).includes(attr)).toBeFalsy();
   });
 
   it.each([
-    ["class", "test"],
-    ["id", "test"],
-    ["data-tooltip", "hello"],
-  ])("should remove attribute : '%s'", (attribute, value) => {
+    ["checked", "checked", false],
+    ["contenteditable", "contentEditable", true],
+    ["disabled", "disabled", true],
+  ])("should check if an attribute is toggled on or off : '%s'", (attr, prop, value) => {
+    const el = createElement("input", { attributes: { type: "checkbox", [attr]: value } });
+
+    expect((el as any)[prop]).toBe(value);
+  });
+
+  it.each([
+    ["class", "test", "className"],
+    ["id", "test", "id"],
+  ])("should remove attribute : '%s'", (attribute, value, prop) => {
     const el = createElement("input", { attributes: { type: "checkbox" } });
 
     setAttribute(attribute, value, el);
@@ -53,6 +62,17 @@ describe("Attribute", () => {
     removeAttribute(attribute, el);
 
     expect(el.getAttribute(attribute)).toBe(null);
+    expect((el as any)[prop]).toBe("");
+  });
+
+  it("should remove data attribute", () => {
+    const el = createElement<HTMLElement>("input", { attributes: { "data-tooltip": "title" } });
+
+    expect(el.dataset.tooltip).toBe("title");
+
+    removeAttribute("data-tooltip", el);
+
+    expect((el as any).dataset.dataTooltip).toBe(undefined);
   });
 
   it("should add attribute provided as array", () => {

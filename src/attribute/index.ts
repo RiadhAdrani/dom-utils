@@ -1,5 +1,53 @@
-import { isArray, isObject, capitalize } from "@riadh-adrani/utils";
+import { isArray, isObject, capitalize, findKey } from "@riadh-adrani/utils";
 import { Arrayable, DomAttribute } from "../types";
+
+const htmlToDom = {
+  class: "className",
+  accesskey: "accessKey",
+  autocapitalise: "autoCapitalize",
+  contenteditable: "contentEditable",
+  contextmenu: "contextMenu",
+  playsinline: "playsInline",
+  spellcheck: "spellCheck",
+  tabindex: "tabIndex",
+  noshade: "noShade",
+  hreflang: "hrefLang",
+  referrerpolicy: "referrerPolicy",
+  datetime: "dateTime",
+  autoplay: "autoPlay",
+  crossorigin: "crossOrigin",
+  ismap: "isMap",
+  usemap: "useMap",
+  srclang: "srcLang",
+  allowfullscreen: "allowFullScreen",
+  allowpaymentrequest: "allowPaymentRequest",
+  srcdoc: "srcDoc",
+  colspan: "colSpan",
+  rowspan: "rowSpan",
+  autofocus: "autoFocus",
+  formaction: "formAction",
+  formenctype: "formEncType",
+  formmethod: "formMethod",
+  formnovalidate: "formNoValidate",
+  formtarget: "formTarget",
+  acceptcharset: "acceptCharset",
+  autocomplete: "autoComplete",
+  novalidate: "noValidate",
+  dirname: "dirName",
+  maxlength: "maxLength",
+  readonly: "readOnly",
+  minlength: "minLength",
+};
+
+export const normalizeToDomProperty = (attribute: string): string => {
+  const pair = findKey((key, dom) => attribute === key || attribute === dom, htmlToDom);
+
+  if (pair) {
+    return pair.value;
+  }
+
+  return attribute;
+};
 
 export const togglableAttributes = [
   "contenteditable",
@@ -33,6 +81,10 @@ export const isTogglableAttribute = (attribute: string): boolean => {
   return togglableAttributes.includes(attribute.trim());
 };
 
+export const getDomProperty = <T = unknown>(prop: string, el: Element): undefined | T => {
+  return (el as unknown as Record<string, T | undefined>)[normalizeToDomProperty(prop)];
+};
+
 /**
  * check if a given attributes is toggled on.
  *
@@ -42,7 +94,7 @@ export const isTogglableAttribute = (attribute: string): boolean => {
  * @param element target element
  */
 export const isToggledOn = (attribute: string, element: Element): boolean => {
-  return isTogglableAttribute(attribute) && (element as any)[attribute] === true;
+  return isTogglableAttribute(attribute) && getDomProperty(attribute, element) === true;
 };
 
 /**
@@ -52,9 +104,11 @@ export const isToggledOn = (attribute: string, element: Element): boolean => {
  * @param element target element
  */
 export const toggleAttribute = (attribute: string, element: Element, value?: boolean): void => {
+  const prop = normalizeToDomProperty(attribute);
+
   if (value !== undefined) {
     element.toggleAttribute(attribute, value === true);
-    (element as any)[attribute] = value === true;
+    (element as any)[prop] = value === true;
   } else {
     element.toggleAttribute(attribute);
   }
@@ -105,16 +159,14 @@ export const setAttribute = (
 
     element.setAttribute(attribute, $value as string);
 
-    if (attribute === "class") {
-      (element as any)["className"] = $value;
-    } else {
-      const $attr = attribute
-        .split("-")
-        .map((t, i) => (i !== 0 ? capitalize(t) : t))
-        .join("");
+    // TODO : data-* attribute should pollute dom nodes
 
-      (element as any)[$attr] = $value;
-    }
+    const $attr = attribute
+      .split("-")
+      .map((t, i) => (i !== 0 ? capitalize(t) : t))
+      .join("");
+
+    (element as any)[normalizeToDomProperty($attr)] = $value;
   }
 };
 
