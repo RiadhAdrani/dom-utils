@@ -1,4 +1,4 @@
-import { expect, it, beforeEach, describe, jest } from "@jest/globals";
+import { expect, it, beforeEach, describe, vitest } from "vitest";
 import { removeEvent, setEvent } from ".";
 import { createElement } from "../element";
 import { DomEventHandler } from "../types";
@@ -41,7 +41,7 @@ describe("Event", () => {
   it("should add multi camel cased events (onContextMenu)", () => {
     const el = createElement<HTMLElement>("div");
 
-    const fn = jest.fn();
+    const fn = vitest.fn();
 
     setEvent("onContextMenu", fn, el);
 
@@ -53,7 +53,7 @@ describe("Event", () => {
   it("should add multi camel cased events (onMouseOver)", () => {
     const el = createElement<HTMLElement>("div");
 
-    const fn = jest.fn();
+    const fn = vitest.fn();
 
     setEvent("onMouseOver", fn, el);
 
@@ -65,8 +65,8 @@ describe("Event", () => {
   it("should replace event", () => {
     const el = createElement<HTMLElement>("div");
 
-    const onClick = jest.fn();
-    const onClick2 = jest.fn();
+    const onClick = vitest.fn();
+    const onClick2 = vitest.fn();
 
     setEvent("onClick", onClick, el);
     setEvent("onClick", onClick2, el);
@@ -98,7 +98,7 @@ describe("Event", () => {
   });
 
   it("should add event listener to the document", () => {
-    const onClick = jest.fn();
+    const onClick = vitest.fn();
 
     setEvent("onClick", onClick, document);
 
@@ -108,7 +108,7 @@ describe("Event", () => {
   });
 
   it("should add event listener to the document", () => {
-    const onClick = jest.fn();
+    const onClick = vitest.fn();
 
     setEvent("onClick", onClick, document);
     removeEvent("onClick", document);

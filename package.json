@@ -8,7 +8,7 @@
     "build/**/*"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "vitest",
     "dev:docs": "next dev",
     "build:docs": "rm -rf out && next build && next export",
     "build:lib": "npm run test && rm -rf build && tsc"
@@ -28,6 +28,7 @@
     "jest": "^29.2.1",
     "jest-environment-jsdom": "^29.2.1",
     "jest-esm-transformer": "^1.0.0",
+    "jsdom": "^21.1.1",
     "next": "^13.1.6",
     "nextra": "^2.2.14",
     "nextra-theme-docs": "^2.2.14",
@@ -37,6 +38,8 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@riadh-adrani/utils": "^0.37.0"
+    "@riadh-adrani/utils": "^0.37.0",
+    "camelcase": "^7.0.1",
+    "vitest": "^0.29.7"
   }
 }
