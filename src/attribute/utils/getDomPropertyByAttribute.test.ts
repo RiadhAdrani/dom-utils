@@ -14,4 +14,10 @@ describe("getDomPropertyByAttribute", () => {
 
     expect(get("contenteditable", el)).toBe(true);
   });
+
+  it("should return null if attribute cannot be converted to dom prop", () => {
+    const el = createElement("div");
+
+    expect(get("my-prop", el)).toBe(undefined);
+  });
 });
