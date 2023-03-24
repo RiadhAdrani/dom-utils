@@ -1,43 +1,6 @@
 import { isArray, isObject, capitalize, findKey } from "@riadh-adrani/utils";
 import { Arrayable, DomAttribute } from "../types";
-
-const htmlToDom = {
-  class: "className",
-  accesskey: "accessKey",
-  autocapitalise: "autoCapitalize",
-  contenteditable: "contentEditable",
-  contextmenu: "contextMenu",
-  playsinline: "playsInline",
-  spellcheck: "spellCheck",
-  tabindex: "tabIndex",
-  noshade: "noShade",
-  hreflang: "hrefLang",
-  referrerpolicy: "referrerPolicy",
-  datetime: "dateTime",
-  autoplay: "autoPlay",
-  crossorigin: "crossOrigin",
-  ismap: "isMap",
-  usemap: "useMap",
-  srclang: "srcLang",
-  allowfullscreen: "allowFullScreen",
-  allowpaymentrequest: "allowPaymentRequest",
-  srcdoc: "srcDoc",
-  colspan: "colSpan",
-  rowspan: "rowSpan",
-  autofocus: "autoFocus",
-  formaction: "formAction",
-  formenctype: "formEncType",
-  formmethod: "formMethod",
-  formnovalidate: "formNoValidate",
-  formtarget: "formTarget",
-  acceptcharset: "acceptCharset",
-  autocomplete: "autoComplete",
-  novalidate: "noValidate",
-  dirname: "dirName",
-  maxlength: "maxLength",
-  readonly: "readOnly",
-  minlength: "minLength",
-};
+import { htmlToDom, toggleableAttributes } from "./const";
 
 export const normalizeToDomProperty = (attribute: string): string => {
   const pair = findKey((key, dom) => attribute === key || attribute === dom, htmlToDom);
@@ -49,36 +12,12 @@ export const normalizeToDomProperty = (attribute: string): string => {
   return attribute;
 };
 
-export const togglableAttributes = [
-  "contenteditable",
-  "autofocus",
-  "autoplay",
-  "allowfullscreen",
-  "allowpaymentreques",
-  "checked",
-  "controls",
-  "compact",
-  "disabled",
-  "hidden",
-  "ismap",
-  "loop",
-  "multiple",
-  "muted",
-  "open",
-  "playsinline",
-  "readonly",
-  "required",
-  "selected",
-  "async",
-  "defer",
-];
-
 /**
  * return if the given attribute is a standard togglable one.
  * @param attribute attribute name
  */
 export const isTogglableAttribute = (attribute: string): boolean => {
-  return togglableAttributes.includes(attribute.trim());
+  return toggleableAttributes.includes(attribute.trim());
 };
 
 export const getDomProperty = <T = unknown>(prop: string, el: Element): undefined | T => {
@@ -125,7 +64,7 @@ export const setAttribute = (
   value: Arrayable<DomAttribute>,
   element: Element
 ): void => {
-  if (togglableAttributes.includes(attribute)) {
+  if (toggleableAttributes.includes(attribute)) {
     toggleAttribute(attribute, element, value as boolean);
   } else {
     let $value: DomAttribute = "";
