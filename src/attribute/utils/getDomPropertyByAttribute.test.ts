@@ -15,6 +15,12 @@ describe("getDomPropertyByAttribute", () => {
     expect(get("contenteditable", el)).toBe(true);
   });
 
+  it("should return the value of data-field", () => {
+    const el = createElement("div", { attributes: { "data-field": "test" } });
+
+    expect(get("data-field", el)).toBe("test");
+  });
+
   it("should return null if attribute cannot be converted to dom prop", () => {
     const el = createElement("div");
 
