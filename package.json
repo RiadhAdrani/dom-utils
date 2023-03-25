@@ -1,6 +1,7 @@
 {
   "name": "@riadh-adrani/dom-utils",
-  "version": "1.0.4",
+  "version": "1.0.6",
+  "type": "module",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "main": "build/index.js",
   "types": "build/index.d.ts",

@@ -1,10 +1,10 @@
 export default {
-  logo: <span>Dom Control</span>,
+  logo: <span>Dom Utils</span>,
   project: {
     link: "https://github.com/RiadhAdrani/dom-control-js",
   },
   useNextSeoProps() {
-    return { titleTemplate: "%s | Dom Control" };
+    return { titleTemplate: "%s | Dom Utils" };
   },
   footer: {
     text: (

@@ -5,13 +5,15 @@
     "./jest.config.js",
     "./**.config.js",
     "./**.config.jsx",
-    "out"
+    "out",
+    "vitest.config.js"
   ],
   "compilerOptions": {
-    "target": "es2016",
+    "target": "ES2016",
     "lib": ["es6", "dom"],
-    "module": "commonjs",
+    "module": "ES2020",
     "rootDir": ".",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowJs": true,
     "declaration": true,
@@ -20,7 +22,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "jsx": "preserve"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

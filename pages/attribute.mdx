@@ -12,7 +12,6 @@ if the attribute is not found, we return the camel-cased version of the attribut
 
 ```ts
 function (attr: string): string
-
 ```
 
 - `attr` : html attribute.
@@ -23,7 +22,6 @@ checks if the given string is a `data-*` attribute.
 
 ```ts
 function (attr: string): boolean
-
 ```
 
 - `attr` : html attribute.
@@ -38,7 +36,6 @@ get key from a `data-*` attribute.
 
 ```ts
 function (attr: string): string | undefined
-
 ```
 
 - `attr` : html attribute.
@@ -49,11 +46,10 @@ retrieve the dom property value by its html attribute counterpart.
 
 ```ts
 function <T = string>(attr: string, el: Element): T | undefined
-
 ```
 
 - `attr` : html attribute.
-- `el`: source element.
+- `el` : source element.
 
 ### `isNativeToggleableAttribute()`
 
@@ -61,7 +57,6 @@ checks if the given attribute is natively toggleable.
 
 ```ts
 function (attr: string): boolean
-
 ```
 
 - `attr` : html attribute.
@@ -72,11 +67,10 @@ checks if the given attribute is toggleable and toggled on.
 
 ```ts
 function (attr: string, el: Element): boolean
-
 ```
 
 - `attr` : html attribute.
-- `el`: source element.
+- `el` : source element.
 
 ### `toggleAttribute()`
 
@@ -84,11 +78,10 @@ toggle the given attribute regardless of its type.
 
 ```ts
 function (attr: string, el: Element, value?: boolean): void
-
 ```
 
 - `attr` : html attribute.
-- `el`: source element.
+- `el` : source element.
 - `value`: optional boolean.
 
 ### `setAttribute()`
@@ -97,12 +90,11 @@ set the value of an element's attribute with the given name.
 
 ```ts
 function (attr: string, value: Arrayable<DomAttribute>, el: Element): void
-
 ```
 
 - `attr` : html attribute.
 - `value`: value.
-- `el`: source element.
+- `el` : source element.
 
 ### `removeAttribute()`
 
@@ -110,8 +102,7 @@ remove the element's attribute with the given name.
 
 ```ts
 function (attr: string, el: Element): void
-
 ```
 
 - `attr` : html attribute.
-- `el`: source element.
+- `el` : source element.
