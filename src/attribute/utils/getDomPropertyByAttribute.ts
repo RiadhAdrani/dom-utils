@@ -2,9 +2,12 @@ import convertAttributeToDomProperty from "./convertAttributeToDomProperty";
 import isDataAttr from "./isDataAttr";
 import keyFromDataAttr from "./keyFromDataAttr";
 
-export default <T = string>(attr: string, el: Element): T | undefined => {
-  const $el = el as unknown as Record<string, T | undefined>;
-
+/**
+ * retrieve the dom property value by its html attribute counterpart.
+ * @param attr html attribute
+ * @param el source element
+ */
+const fn = <T = string>(attr: string, el: Element): T | undefined => {
   if (isDataAttr(attr)) {
     const key = keyFromDataAttr(attr);
 
@@ -15,3 +18,5 @@ export default <T = string>(attr: string, el: Element): T | undefined => {
 
   return (el as unknown as Record<string, T | undefined>)[prop];
 };
+
+export default fn;

@@ -1,7 +1,16 @@
 import camelcase from "camelcase";
 import isDataAttr from "./isDataAttr";
 
-export default (attr: string): string | undefined => {
+/**
+ * get key from a data attribute.
+ *
+ * - `"data-title"` => `"title"`
+ *
+ * - `"my-attr"` => `undefined`
+ *
+ * @param attr attribute
+ */
+const fn = (attr: string): string | undefined => {
   if (!isDataAttr(attr)) {
     return undefined;
   }
@@ -10,3 +19,5 @@ export default (attr: string): string | undefined => {
 
   return camelcase(key);
 };
+
+export default fn;

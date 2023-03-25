@@ -1,48 +1,42 @@
-import { isArray, isObject, capitalize, findKey } from "@riadh-adrani/utils";
+import { isArray, isObject } from "@riadh-adrani/utils";
 import { Arrayable, DomAttribute } from "../types";
-import { htmlToDom, toggleableAttributes } from "./const";
-import { convertAttributeToDomProperty, isDataAttr, keyFromDataAttr } from "./utils";
+import {
+  convertAttributeToDomProperty,
+  isDataAttr,
+  isNativeToggleableAttribute,
+  keyFromDataAttr,
+} from "./utils";
 
-/**
- * return if the given attribute is a standard togglable one.
- * @param attribute attribute name
- */
-export const isTogglableAttribute = (attribute: string): boolean => {
-  return toggleableAttributes.includes(attribute.trim());
-};
+export * from "./utils";
 
 /**
  * toggle the given attribute.
- * @param attribute name
+ * @param attr name
  * @param value optional force value
- * @param element target element
+ * @param el target element
  */
-export const toggleAttribute = (attribute: string, element: Element, value?: boolean): void => {
-  const prop = convertAttributeToDomProperty(attribute);
+export const toggleAttribute = (attr: string, el: Element, value?: boolean): void => {
+  const prop = convertAttributeToDomProperty(attr);
 
   if (value !== undefined) {
     const $val = value === true;
 
-    element.toggleAttribute(attribute, $val);
-    (element as any)[prop] = $val;
+    el.toggleAttribute(attr, $val);
+    (el as any)[prop] = $val;
   } else {
-    element.toggleAttribute(attribute);
+    el.toggleAttribute(attr);
   }
 };
 
 /**
  * set the value of an element's attribute with the given name.
- * @param attribute name
+ * @param attr name
  * @param value value
- * @param element target element
+ * @param el target element
  */
-export const setAttribute = (
-  attribute: string,
-  value: Arrayable<DomAttribute>,
-  element: Element
-): void => {
-  if (toggleableAttributes.includes(attribute)) {
-    toggleAttribute(attribute, element, value as boolean);
+export const setAttribute = (attr: string, value: Arrayable<DomAttribute>, el: Element): void => {
+  if (isNativeToggleableAttribute(attr)) {
+    toggleAttribute(attr, el, value as boolean);
   } else {
     let $value: DomAttribute = "";
 
@@ -52,13 +46,13 @@ export const setAttribute = (
 
         const $computed = isArray($v) ? ($v as unknown as Array<string>).join(" ") : $v;
 
-        switch (attribute) {
+        switch (attr) {
           case "dataset": {
-            setAttribute(`data-${key}`, $computed, element);
+            setAttribute(`data-${key}`, $computed, el);
             break;
           }
           case "style": {
-            ((element as HTMLElement).style as unknown as Record<string, string>)[key] = $computed;
+            ((el as HTMLElement).style as unknown as Record<string, string>)[key] = $computed;
             break;
           }
         }
@@ -73,39 +67,39 @@ export const setAttribute = (
       $value = value as DomAttribute;
     }
 
-    element.setAttribute(attribute, $value as string);
+    el.setAttribute(attr, $value as string);
 
-    if (isDataAttr(attribute)) {
-      const key = keyFromDataAttr(attribute) as string;
+    if (isDataAttr(attr)) {
+      const key = keyFromDataAttr(attr) as string;
 
-      (element as HTMLElement).dataset[key] = $value as string;
+      (el as HTMLElement).dataset[key] = $value as string;
     } else {
-      const prop = convertAttributeToDomProperty(attribute);
+      const prop = convertAttributeToDomProperty(attr);
 
-      (element as unknown as Record<string, unknown>)[prop] = $value;
+      (el as unknown as Record<string, unknown>)[prop] = $value;
     }
   }
 };
 
 /**
  * remove the element's attribute with the given name.
- * @param attribute name
- * @param element target element
+ * @param attr name
+ * @param el target element
  */
-export const removeAttribute = (attribute: string, element: Element): void => {
-  if (isTogglableAttribute(attribute)) {
-    toggleAttribute(attribute, element, false);
+export const removeAttribute = (attr: string, el: Element): void => {
+  if (isNativeToggleableAttribute(attr)) {
+    toggleAttribute(attr, el, false);
   } else {
-    element.removeAttribute(attribute);
+    el.removeAttribute(attr);
 
-    if (isDataAttr(attribute)) {
-      const key = keyFromDataAttr(attribute) as string;
+    if (isDataAttr(attr)) {
+      const key = keyFromDataAttr(attr) as string;
 
-      delete (element as HTMLElement).dataset[key];
+      delete (el as HTMLElement).dataset[key];
     } else {
-      const prop = convertAttributeToDomProperty(attribute);
+      const prop = convertAttributeToDomProperty(attr);
 
-      delete (element as unknown as Record<string, unknown>)[prop];
+      delete (el as unknown as Record<string, unknown>)[prop];
     }
   }
 };

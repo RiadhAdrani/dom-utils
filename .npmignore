@@ -7,3 +7,4 @@ pages
 out
 theme.config.jsx
 next.config.js
+vitest.config.ts

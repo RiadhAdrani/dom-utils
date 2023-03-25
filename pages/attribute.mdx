@@ -4,70 +4,114 @@ Handle element's attributes.
 
 ---
 
-### `isToggleAttribute`
+### `convertAttributeToDomProperty()`
 
-return if the given attribute is a standard togglable one.
+convert attribute to dom property.
 
-```ts
-function isToggleAttribute(attribute: string): boolean;
-```
-
-- `attribute` : name of the attribute.
-
----
-
-### `isToggledOn`
-
-check if a given attributes is toggled on.
-
-> If a non-standard toggleable attribute name is provided, it will return false;
+if the attribute is not found, we return the camel-cased version of the attribute.
 
 ```ts
-function isToggledOn(attribute: string, element: Element): boolean;
+function (attr: string): string
+
 ```
 
-- `attribute` : name of the attribute.
-- `element` : target element.
+- `attr` : html attribute.
 
----
+### `isDataAttr()`
 
-### `toggleAttribute`
-
-toggle the given attribute.
+checks if the given string is a `data-*` attribute.
 
 ```ts
-function toggleAttribute(attribute: string, element: Element, value?: boolean): void;
+function (attr: string): boolean
+
 ```
 
-- `attribute` : name of the attribute.
-- `element` : target element.
-- `value` : optional, used to force a value.
+- `attr` : html attribute.
 
----
+### `keyFromDataAttr()`
 
-### `setAttribute`
+get key from a `data-*` attribute.
+
+- `"data-title"` => `"title"`
+
+- `"my-attr"` => `undefined`
+
+```ts
+function (attr: string): string | undefined
+
+```
+
+- `attr` : html attribute.
+
+### `getDomPropertyByAttribute()`
+
+retrieve the dom property value by its html attribute counterpart.
+
+```ts
+function <T = string>(attr: string, el: Element): T | undefined
+
+```
+
+- `attr` : html attribute.
+- `el`: source element.
+
+### `isNativeToggleableAttribute()`
+
+checks if the given attribute is natively toggleable.
+
+```ts
+function (attr: string): boolean
+
+```
+
+- `attr` : html attribute.
+
+### `isToggledOn()`
+
+checks if the given attribute is toggleable and toggled on.
+
+```ts
+function (attr: string, el: Element): boolean
+
+```
+
+- `attr` : html attribute.
+- `el`: source element.
+
+### `toggleAttribute()`
+
+toggle the given attribute regardless of its type.
+
+```ts
+function (attr: string, el: Element, value?: boolean): void
+
+```
+
+- `attr` : html attribute.
+- `el`: source element.
+- `value`: optional boolean.
+
+### `setAttribute()`
 
 set the value of an element's attribute with the given name.
 
 ```ts
-function setAttribute(attribute: string, value: Arrayable<DomAttribute>, element: Element): void;
+function (attr: string, value: Arrayable<DomAttribute>, el: Element): void
+
 ```
 
-- `attribute` : name of the attribute.
-- `value` : attribute value.
-- `element` : target element.
+- `attr` : html attribute.
+- `value`: value.
+- `el`: source element.
 
-See also: [Arrayable](types/#arrayable), [DomAttribute](types/#domattribute)
-
----
-
-### `removeAttribute`
+### `removeAttribute()`
 
 remove the element's attribute with the given name.
 
 ```ts
-function removeAttribute(attribute: string, element: Element): void;
+function (attr: string, el: Element): void
+
 ```
 
-- `attribute` : name of the attribute.
-- `element` : target element.
+- `attr` : html attribute.
+- `el`: source element.
