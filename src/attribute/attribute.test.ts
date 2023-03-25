@@ -1,17 +1,8 @@
 import { expect, it, describe } from "vitest";
-import { setAttribute, removeAttribute, toggleAttribute, normalizeToDomProperty } from ".";
+import { setAttribute, removeAttribute, toggleAttribute } from ".";
 import { createElement } from "../element";
 
 describe("Attribute", () => {
-  it.each([
-    ["contentEditable", "contentEditable"],
-    ["contenteditable", "contentEditable"],
-    ["ismap", "isMap"],
-    ["data-title", "data-title"],
-  ])("should normalize attribute", (attr, prop) => {
-    expect(normalizeToDomProperty(attr)).toBe(prop);
-  });
-
   it.each([
     ["class", "test"],
     ["id", "test"],
@@ -63,6 +54,10 @@ describe("Attribute", () => {
 
     expect(el.getAttribute(attribute)).toBe(null);
     expect((el as any)[prop]).toBe("");
+
+    // test if we can add property after deleting the prop key
+    setAttribute(attribute, value, el);
+    expect(el.getAttribute(attribute)).toBe(value);
   });
 
   it("should remove data attribute", () => {

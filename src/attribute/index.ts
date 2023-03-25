@@ -1,16 +1,7 @@
 import { isArray, isObject, capitalize, findKey } from "@riadh-adrani/utils";
 import { Arrayable, DomAttribute } from "../types";
 import { htmlToDom, toggleableAttributes } from "./const";
-
-export const normalizeToDomProperty = (attribute: string): string => {
-  const pair = findKey((key, dom) => attribute === key || attribute === dom, htmlToDom);
-
-  if (pair) {
-    return pair.value;
-  }
-
-  return attribute;
-};
+import { convertAttributeToDomProperty, isDataAttr, keyFromDataAttr } from "./utils";
 
 /**
  * return if the given attribute is a standard togglable one.
@@ -20,22 +11,6 @@ export const isTogglableAttribute = (attribute: string): boolean => {
   return toggleableAttributes.includes(attribute.trim());
 };
 
-export const getDomProperty = <T = unknown>(prop: string, el: Element): undefined | T => {
-  return (el as unknown as Record<string, T | undefined>)[normalizeToDomProperty(prop)];
-};
-
-/**
- * check if a given attributes is toggled on.
- *
- * If a non-standard toggleable attribute name is provided, it will return false;
- *
- * @param attribute name
- * @param element target element
- */
-export const isToggledOn = (attribute: string, element: Element): boolean => {
-  return isTogglableAttribute(attribute) && getDomProperty(attribute, element) === true;
-};
-
 /**
  * toggle the given attribute.
  * @param attribute name
@@ -43,11 +18,13 @@ export const isToggledOn = (attribute: string, element: Element): boolean => {
  * @param element target element
  */
 export const toggleAttribute = (attribute: string, element: Element, value?: boolean): void => {
-  const prop = normalizeToDomProperty(attribute);
+  const prop = convertAttributeToDomProperty(attribute);
 
   if (value !== undefined) {
-    element.toggleAttribute(attribute, value === true);
-    (element as any)[prop] = value === true;
+    const $val = value === true;
+
+    element.toggleAttribute(attribute, $val);
+    (element as any)[prop] = $val;
   } else {
     element.toggleAttribute(attribute);
   }
@@ -98,14 +75,15 @@ export const setAttribute = (
 
     element.setAttribute(attribute, $value as string);
 
-    // TODO : data-* attribute should pollute dom nodes
+    if (isDataAttr(attribute)) {
+      const key = keyFromDataAttr(attribute) as string;
 
-    const $attr = attribute
-      .split("-")
-      .map((t, i) => (i !== 0 ? capitalize(t) : t))
-      .join("");
+      (element as HTMLElement).dataset[key] = $value as string;
+    } else {
+      const prop = convertAttributeToDomProperty(attribute);
 
-    (element as any)[normalizeToDomProperty($attr)] = $value;
+      (element as unknown as Record<string, unknown>)[prop] = $value;
+    }
   }
 };
 
@@ -119,5 +97,15 @@ export const removeAttribute = (attribute: string, element: Element): void => {
     toggleAttribute(attribute, element, false);
   } else {
     element.removeAttribute(attribute);
+
+    if (isDataAttr(attribute)) {
+      const key = keyFromDataAttr(attribute) as string;
+
+      delete (element as HTMLElement).dataset[key];
+    } else {
+      const prop = convertAttributeToDomProperty(attribute);
+
+      delete (element as unknown as Record<string, unknown>)[prop];
+    }
   }
 };
