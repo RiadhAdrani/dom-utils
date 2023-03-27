@@ -1,13 +1,13 @@
 import { isArray, isObject } from "@riadh-adrani/utils";
-import { Arrayable, DomAttribute } from "../types";
+import { Arrayable, DomAttribute } from "../types/index.js";
 import {
   convertAttributeToDomProperty,
   isDataAttr,
   isNativeToggleableAttribute,
   keyFromDataAttr,
-} from "./utils";
+} from "./utils/index.js";
 
-export * from "./utils";
+export * from "./utils/index.js";
 
 /**
  * toggle the given attribute.

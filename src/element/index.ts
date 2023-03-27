@@ -1,7 +1,7 @@
 import { isBlank } from "@riadh-adrani/utils";
-import { setAttribute } from "../attribute";
-import { setEvent } from "../event";
-import { DomChild, DomElementOptions, DomTagName } from "../types";
+import { setAttribute } from "../attribute/index.js";
+import { setEvent } from "../event/index.js";
+import { DomChild, DomElementOptions, DomTagName } from "../types/index.js";
 
 /**
  * Check if the given element is a text node.

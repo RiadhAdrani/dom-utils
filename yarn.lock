@@ -857,10 +857,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@riadh-adrani/utils@^0.37.0":
-  version "0.37.0"
-  resolved "https://registry.yarnpkg.com/@riadh-adrani/utils/-/utils-0.37.0.tgz#e25fc7b138e63884fd6d225ec608707b855a692e"
-  integrity sha512-J0fv/kSs1n0TmJIzrqyS1Xm5C0nT5PFe9BCTQuo4nKPo1hyMz0N+Jzk0jWT91s9OybPXUOKVanLMsPADwZU4RQ==
+"@riadh-adrani/utils@^0.38.3-esm":
+  version "0.38.3-esm"
+  resolved "https://registry.yarnpkg.com/@riadh-adrani/utils/-/utils-0.38.3-esm.tgz#fa2b1cf58a425116cf179bc19635dd3bbcdbbab1"
+  integrity sha512-KDzZooZj7yMeisRNNLpBnLiQyzlAQH5Fdy+N2tByHsUf2FH9ekEMlE3qOPKeTXMzKHY1A1yDPh2vdS3VQV01lQ==
 
 "@sinclair/typebox@^0.25.16":
   version "0.25.21"

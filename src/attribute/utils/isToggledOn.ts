@@ -1,5 +1,5 @@
-import getDomPropertyByAttribute from "./getDomPropertyByAttribute";
-import isNativeToggleableAttribute from "./isNativeToggleableAttribute";
+import getDomPropertyByAttribute from "./getDomPropertyByAttribute.js";
+import isNativeToggleableAttribute from "./isNativeToggleableAttribute.js";
 
 /**
  * checks if the given attribute is toggleable and toggled on.

@@ -1,6 +1,6 @@
 import { isFunction } from "@riadh-adrani/utils";
-import { isElement } from "../element";
-import { DomEvent, DomEventHandler } from "../types";
+import { isElement } from "../element/index.js";
+import { DomEvent, DomEventHandler } from "../types/index.js";
 
 export const eventStore = "__dom_control_events__";
 

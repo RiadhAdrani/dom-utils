@@ -1,6 +1,6 @@
-import convertAttributeToDomProperty from "./convertAttributeToDomProperty";
-import isDataAttr from "./isDataAttr";
-import keyFromDataAttr from "./keyFromDataAttr";
+import convertAttributeToDomProperty from "./convertAttributeToDomProperty.js";
+import isDataAttr from "./isDataAttr.js";
+import keyFromDataAttr from "./keyFromDataAttr.js";
 
 /**
  * retrieve the dom property value by its html attribute counterpart.

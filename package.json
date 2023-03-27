@@ -1,10 +1,13 @@
 {
   "name": "@riadh-adrani/dom-utils",
-  "version": "1.0.6",
+  "version": "1.0.7-esm",
   "type": "module",
   "description": "Utility functions to create and manipulate elements in the DOM.",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "exports": "./build/index.js",
+  "engines": {
+    "node": ">=14.16"
+  },
+  "types": "./build/index.d.ts",
   "files": [
     "build/**/*"
   ],
@@ -40,7 +43,7 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
-    "@riadh-adrani/utils": "^0.37.0",
+    "@riadh-adrani/utils": "^0.38.3-esm",
     "camelcase": "^7.0.1"
   }
 }

@@ -1,4 +1,4 @@
-import { toggleableAttributes } from "../const";
+import { toggleableAttributes } from "../const.js";
 
 /**
  * checks if the given attribute is natively toggleable.

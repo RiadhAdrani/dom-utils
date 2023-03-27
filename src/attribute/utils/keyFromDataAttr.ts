@@ -1,5 +1,5 @@
 import camelcase from "camelcase";
-import isDataAttr from "./isDataAttr";
+import isDataAttr from "./isDataAttr.js";
 
 /**
  * get key from a data attribute.

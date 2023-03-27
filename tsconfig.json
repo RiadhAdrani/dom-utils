@@ -11,9 +11,9 @@
   "compilerOptions": {
     "target": "ES2016",
     "lib": ["es6", "dom"],
-    "module": "ES2020",
+    "module": "Node16",
     "rootDir": ".",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "resolveJsonModule": true,
     "allowJs": true,
     "declaration": true,
@@ -22,8 +22,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
-    "jsx": "preserve"
+    "skipLibCheck": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -1,6 +1,6 @@
 import { findKey } from "@riadh-adrani/utils";
 import camelCase from "camelcase";
-import { htmlToDom } from "../const";
+import { htmlToDom } from "../const.js";
 
 /**
  * convert attribute to dom property
