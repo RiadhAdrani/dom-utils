@@ -1,4 +1,4 @@
-<h1 align="center">DOM Utils</h1>
+<h1 align="center">Dom Utils</h1>
 <p align="center">
 <a href="https://www.npmjs.com/package/@riadh-adrani/dom-utils">
 <img src="https://img.shields.io/npm/v/@riadh-adrani/dom-utils?color=blue" />
@@ -10,4 +10,6 @@
 <img src="https://img.shields.io/badge/docs-documentation-green" />
 </a>
 
-<p align="center">Utility functions to create and manipulate elements in the DOM.</p>
+<p align="center">Utility functions to create, update and manipulate DOM elements.</p>
+
+<p align="center"> This package is purely esm, read <a href="https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c" target="_blank">this article</a> for more information. </p>

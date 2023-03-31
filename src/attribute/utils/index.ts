@@ -4,3 +4,4 @@ export { default as keyFromDataAttr } from "./keyFromDataAttr.js";
 export { default as getDomPropertyByAttribute } from "./getDomPropertyByAttribute.js";
 export { default as isNativeToggleableAttribute } from "./isNativeToggleableAttribute.js";
 export { default as isToggledOn } from "./isToggledOn.js";
+export { default as hasNoSetter } from "./hasNoSetter.js";

@@ -1,7 +1,8 @@
-import { isArray, isObject } from "@riadh-adrani/utils";
+import { cast, isArray, isObject } from "@riadh-adrani/utils";
 import { Arrayable, DomAttribute } from "../types/index.js";
 import {
   convertAttributeToDomProperty,
+  hasNoSetter,
   isDataAttr,
   isNativeToggleableAttribute,
   keyFromDataAttr,
@@ -22,7 +23,10 @@ export const toggleAttribute = (attr: string, el: Element, value?: boolean): voi
     const $val = value === true;
 
     el.toggleAttribute(attr, $val);
-    (el as any)[prop] = $val;
+
+    if (!hasNoSetter(attr)) {
+      (el as any)[prop] = $val;
+    }
   } else {
     el.toggleAttribute(attr);
   }
@@ -52,7 +56,7 @@ export const setAttribute = (attr: string, value: Arrayable<DomAttribute>, el: E
             break;
           }
           case "style": {
-            ((el as HTMLElement).style as unknown as Record<string, string>)[key] = $computed;
+            (cast<HTMLElement>(el).style as unknown as Record<string, string>)[key] = $computed;
             break;
           }
         }
@@ -73,7 +77,7 @@ export const setAttribute = (attr: string, value: Arrayable<DomAttribute>, el: E
       const key = keyFromDataAttr(attr) as string;
 
       (el as HTMLElement).dataset[key] = $value as string;
-    } else {
+    } else if (!hasNoSetter(attr)) {
       const prop = convertAttributeToDomProperty(attr);
 
       (el as unknown as Record<string, unknown>)[prop] = $value;
@@ -99,7 +103,9 @@ export const removeAttribute = (attr: string, el: Element): void => {
     } else {
       const prop = convertAttributeToDomProperty(attr);
 
-      delete (el as unknown as Record<string, unknown>)[prop];
+      if (!hasNoSetter(attr)) {
+        delete cast<Record<string, unknown>>(el)[prop];
+      }
     }
   }
 };

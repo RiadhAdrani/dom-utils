@@ -1,5 +1,5 @@
 import { expect, it, describe } from "vitest";
-import { setAttribute, removeAttribute, toggleAttribute } from ".";
+import { setAttribute, removeAttribute, toggleAttribute, getDomPropertyByAttribute } from ".";
 import { createElement } from "../element";
 
 describe("Attribute", () => {
@@ -122,5 +122,35 @@ describe("Attribute", () => {
 
     expect(el.style.padding).toBe("0px 5px");
     expect(el.getAttribute("style")).toBe("padding: 0px 5px;");
+  });
+
+  it("should set attribute with no setter without throwing", () => {
+    const el = createElement<SVGSVGElement>("svg", { namespace: "http://www.w3.org/2000/svg" });
+
+    setAttribute("viewBox", "0 0 24 24", el);
+
+    expect(el.getAttribute("viewBox")).toBe("0 0 24 24");
+  });
+
+  it("should update attribute with no setter", () => {
+    const el = createElement<SVGSVGElement>("svg", {
+      namespace: "http://www.w3.org/2000/svg",
+      attributes: { viewBox: "0 0 24 24" },
+    });
+
+    setAttribute("viewBox", "0 0 100 100", el);
+
+    expect(el.getAttribute("viewBox")).toBe("0 0 100 100");
+  });
+
+  it("should remove attribute with no setter", () => {
+    const el = createElement<SVGSVGElement>("svg", {
+      namespace: "http://www.w3.org/2000/svg",
+      attributes: { viewBox: "0 0 24 24" },
+    });
+
+    removeAttribute("viewBox", el);
+
+    expect(el.getAttribute("viewBox")).toBe(null);
   });
 });

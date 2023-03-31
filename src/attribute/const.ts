@@ -59,3 +59,5 @@ export const toggleableAttributes = [
   "async",
   "defer",
 ];
+
+export const noSetter = ["viewBox"];

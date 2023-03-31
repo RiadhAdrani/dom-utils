@@ -1,6 +1,6 @@
 {
   "name": "@riadh-adrani/dom-utils",
-  "version": "1.0.7-esm",
+  "version": "1.0.7",
   "type": "module",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "exports": "./build/index.js",
@@ -43,7 +43,7 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
-    "@riadh-adrani/utils": "^0.38.3-esm",
+    "@riadh-adrani/utils": "0.38.5",
     "camelcase": "^7.0.1"
   }
 }
