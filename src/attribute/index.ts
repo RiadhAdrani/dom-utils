@@ -77,10 +77,12 @@ export const setAttribute = (attr: string, value: Arrayable<DomAttribute>, el: E
       const key = keyFromDataAttr(attr) as string;
 
       (el as HTMLElement).dataset[key] = $value as string;
-    } else if (!hasNoSetter(attr)) {
-      const prop = convertAttributeToDomProperty(attr);
+    } else {
+      try {
+        const prop = convertAttributeToDomProperty(attr);
 
-      (el as unknown as Record<string, unknown>)[prop] = $value;
+        (el as unknown as Record<string, unknown>)[prop] = $value;
+      } catch (e) {}
     }
   }
 };

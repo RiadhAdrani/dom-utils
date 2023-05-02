@@ -2,7 +2,7 @@ import { isFunction } from "@riadh-adrani/utils";
 import { isElement } from "../element/index.js";
 import { DomEvent, DomEventHandler } from "../types/index.js";
 
-export const eventStore = "__dom_control_events__";
+export const __Event__Store__ = "__dom__utils__events__store__";
 
 /**
  * check if the given name is an event name.
@@ -47,19 +47,19 @@ export const setEvent = <T = Event, E extends Object = Element>(
   const ev = name.toLocaleLowerCase();
   const listener = ev.slice(2);
 
-  if (!(element as Record<string, any>)[eventStore]) {
-    (element as Record<string, any>)[eventStore] = {};
+  if (!(element as Record<string, any>)[__Event__Store__]) {
+    (element as Record<string, any>)[__Event__Store__] = {};
   }
 
-  if ((element as Record<string, any>)[eventStore][ev]) {
+  if ((element as Record<string, any>)[__Event__Store__][ev]) {
     removeEvent(ev, element as unknown as Element);
   }
 
-  (element as Record<string, any>)[eventStore][ev] = (e: DomEvent<T, E>) => callback(e);
+  (element as Record<string, any>)[__Event__Store__][ev] = (e: DomEvent<T, E>) => callback(e);
 
   (element as unknown as Element).addEventListener(
     listener,
-    (element as Record<string, any>)[eventStore][ev]
+    (element as Record<string, any>)[__Event__Store__][ev]
   );
 };
 
@@ -76,7 +76,7 @@ export const removeEvent = (name: string, element: unknown) => {
   const ev = name.toLocaleLowerCase();
   const listener = ev.slice(2);
 
-  const callback = (element as Record<string, any>)[eventStore][ev];
+  const callback = (element as Record<string, any>)[__Event__Store__][ev];
 
   if (callback) {
     (element as Element).removeEventListener(listener, callback);

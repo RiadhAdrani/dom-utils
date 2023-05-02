@@ -5,7 +5,7 @@
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "exports": "./build/index.js",
   "engines": {
-    "node": ">=14.16"
+    "node": ">=16.0.0"
   },
   "types": "./build/index.d.ts",
   "files": [
@@ -43,7 +43,7 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
-    "@riadh-adrani/utils": "0.38.5",
+    "@riadh-adrani/utils": "^0.39.0",
     "camelcase": "^7.0.1"
   }
 }

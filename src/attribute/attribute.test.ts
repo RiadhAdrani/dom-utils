@@ -1,6 +1,7 @@
 import { expect, it, describe } from "vitest";
 import { setAttribute, removeAttribute, toggleAttribute, getDomPropertyByAttribute } from ".";
 import { createElement } from "../element";
+import { Namespace } from "../types";
 
 describe("Attribute", () => {
   it.each([
@@ -125,7 +126,7 @@ describe("Attribute", () => {
   });
 
   it("should set attribute with no setter without throwing", () => {
-    const el = createElement<SVGSVGElement>("svg", { namespace: "http://www.w3.org/2000/svg" });
+    const el = createElement<SVGSVGElement>("svg", { namespace: Namespace.SVG });
 
     setAttribute("viewBox", "0 0 24 24", el);
 
@@ -134,7 +135,7 @@ describe("Attribute", () => {
 
   it("should update attribute with no setter", () => {
     const el = createElement<SVGSVGElement>("svg", {
-      namespace: "http://www.w3.org/2000/svg",
+      namespace: Namespace.SVG,
       attributes: { viewBox: "0 0 24 24" },
     });
 
@@ -145,12 +146,23 @@ describe("Attribute", () => {
 
   it("should remove attribute with no setter", () => {
     const el = createElement<SVGSVGElement>("svg", {
-      namespace: "http://www.w3.org/2000/svg",
+      namespace: Namespace.SVG,
       attributes: { viewBox: "0 0 24 24" },
     });
 
     removeAttribute("viewBox", el);
 
     expect(el.getAttribute("viewBox")).toBe(null);
+  });
+
+  it("should not throw when setting svg width", () => {
+    const el = createElement<SVGSVGElement>("svg", {
+      namespace: Namespace.SVG,
+      attributes: { viewBox: "0 0 24 24" },
+    });
+
+    setAttribute("width", 100, el);
+
+    expect(el.getAttribute("width")).toBe("100");
   });
 });
