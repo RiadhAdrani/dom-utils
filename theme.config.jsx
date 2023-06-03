@@ -1,4 +1,5 @@
 export default {
+  docsRepositoryBase: "https://github.com/RiadhAdrani/dom-control-js/tree/master",
   logo: <span>Dom Utils</span>,
   project: {
     link: "https://github.com/RiadhAdrani/dom-control-js",
