@@ -15,7 +15,7 @@
     "test": "vitest",
     "dev:docs": "next dev",
     "build:docs": "rm -rf out && next build && next export",
-    "build:lib": "rm -rf build && tsc"
+    "build:lib": "rm -rf build && tsc -p tsconfig.build.json"
   },
   "keywords": [
     "dom",

@@ -25,10 +25,10 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "skipLibCheck": true,
     "noEmit": true
   },
   "include": [
