@@ -1,6 +1,6 @@
 import { Callback, StringWithAutoComplete, hasProperty, isFunction } from '@riadh-adrani/utils';
 import { isElement } from '../element/index.js';
-import { DomEvent, DomEventHandler } from '../types/index.js';
+import { DomEvent, DomEventHandler, DomEventName } from '../types/index.js';
 
 export const __Event__Store__ = '__dom__utils__events__store__';
 
@@ -30,6 +30,7 @@ export const isOnEventName = (name: string): boolean => {
  * @param name event name.
  * @param callback callback
  * @param element target element
+ * @deprecated
  */
 export const setEvent = <T = Event, E extends Object = Element>(
   name: string,
@@ -67,6 +68,7 @@ export const setEvent = <T = Event, E extends Object = Element>(
  * removes given element named event.
  * @param name event name.
  * @param element target element
+ * @deprecated
  */
 export const removeEvent = (name: string, element: unknown) => {
   if (!(isElement(element) || element instanceof Document) || !isOnEventName(name)) {
@@ -83,14 +85,6 @@ export const removeEvent = (name: string, element: unknown) => {
   }
 };
 
-export type CamelCasedEventListenerName = `on${Capitalize<keyof DocumentEventMap>}`;
-
-export type LowerEventListenerName = `on${keyof DocumentEventMap}`;
-
-export type EventListenerName = StringWithAutoComplete<
-  CamelCasedEventListenerName | LowerEventListenerName
->;
-
 /**
  * add an event with the given name to the target element.
  *
@@ -100,7 +94,7 @@ export type EventListenerName = StringWithAutoComplete<
  * @param isCustom define if event is custom to tolerate invalid name
  */
 export const addEventListener = <T = Event, E extends Node = Element>(
-  name: EventListenerName,
+  name: DomEventName,
   callback: DomEventHandler<E, T>,
   element: E | Window,
   isCustom?: boolean

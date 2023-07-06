@@ -1,7 +1,7 @@
-import nextra from "nextra";
+import nextra from 'nextra';
 
-const isProduction = process.env.NODE_ENV === "production";
-const assetPrefix = isProduction ? "/dom-control-js" : "";
+const isProduction = process.env.NODE_ENV === 'production';
+const assetPrefix = isProduction ? '/dom-control-js' : '';
 
 const nextConfig = {
   images: {
@@ -15,8 +15,8 @@ const nextConfig = {
 
 const config = {
   ...nextra({
-    theme: "nextra-theme-docs",
-    themeConfig: "./theme.config.jsx",
+    theme: 'nextra-theme-docs',
+    themeConfig: './theme.config.jsx',
     staticImage: true,
   })(),
 };

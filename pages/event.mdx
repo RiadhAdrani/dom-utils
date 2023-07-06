@@ -4,6 +4,28 @@ Handle elemen's events.
 
 ---
 
+### `addEventListener`
+
+Attach an event listener to an element.
+
+```ts
+function addEventListener = <T = Event, E extends Node = Element>(
+  name: EventListenerName,
+  callback: DomEventHandler<E, T>,
+  element: E | Window,
+  isCustom?: boolean
+) =>  Callback;
+```
+
+- `name` : event name.
+- `callback` : event handler.
+- `element` : target element.
+- `isCustom` : define if the given event is custom to skip name validation.
+
+See also: [DomEventHandler](types/#domeventhandler)
+
+---
+
 ### `isOnEventName`
 
 Check if the given name is valid event name.
@@ -23,6 +45,8 @@ function isOnEventName(name: string): boolean;
 ---
 
 ### `setEvent`
+
+<span>`@deprecated`</span>
 
 Add an event with the given name to the target element.
 
@@ -45,6 +69,8 @@ See also: [DomEventHandler](types/#domeventhandler)
 ---
 
 ### `removeEvent`
+
+<span>`@deprecated`</span>
 
 Removes given element named event.
 

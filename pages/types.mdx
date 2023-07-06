@@ -59,9 +59,9 @@ type DomChild = string | number | null | undefined | Element | Text;
 
 ```ts
 type DomNamespace =
-  | "http://www.w3.org/2000/svg"
-  | "http://www.w3.org/1999/xhtml"
-  | "http://www.w3.org/1998/Math/MathML";
+  | 'http://www.w3.org/2000/svg'
+  | 'http://www.w3.org/1999/xhtml'
+  | 'http://www.w3.org/1998/Math/MathML';
 ```
 
 ---
@@ -87,8 +87,24 @@ type DomTagName = StringWithAutoComplete<keyof HTMLElementTagNameMap>;
 
 ---
 
+### `CamelCasedEventListenerName`
+
+```ts
+type CamelCasedEventListenerName = `on${Capitalize<keyof DocumentEventMap>}`;
+```
+
+---
+
+### `LowerEventListenerName`
+
+```ts
+type LowerEventListenerName = `on${keyof DocumentEventMap}`;
+```
+
+---
+
 ### `DomEventName`
 
 ```ts
-type DomEventName = StringWithAutoComplete<`on${keyof DocumentEventMap}`>;
+type DomEventName = StringWithAutoComplete<CamelCasedEventListenerName | LowerEventListenerName>;
 ```
