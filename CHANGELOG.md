@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.2.1 - 2023-07-06
+
 ## 1.2.0 - 2023-07-06
 ### Added
 - add `addEventListener` to replace `addEvent` which is now deprecated.

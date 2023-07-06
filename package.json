@@ -1,6 +1,6 @@
 {
   "name": "@riadh-adrani/dom-utils",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "exports": "./build/index.js",
