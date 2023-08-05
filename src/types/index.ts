@@ -38,3 +38,5 @@ export type LowerEventListenerName = `on${keyof DocumentEventMap}`;
 export type DomEventName = StringWithAutoComplete<
   CamelCasedEventListenerName | LowerEventListenerName
 >;
+
+export type AnyElement = Node | Element | HTMLElement | SVGElement | Text | Document | Window;

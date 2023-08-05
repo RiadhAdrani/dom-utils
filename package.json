@@ -4,6 +4,7 @@
   "type": "module",
   "description": "Utility functions to create and manipulate elements in the DOM.",
   "exports": "./build/index.js",
+  "main": "./build/index.js",
   "engines": {
     "node": ">=16.0.0"
   },
