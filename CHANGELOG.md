@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.3.1 - 2023-08-13
+
 ## 1.3.0 - 2023-08-13
 ### Changed
 - `setEvent` is back from deprecation, it accepts an `id` for multiple events with the same type.
