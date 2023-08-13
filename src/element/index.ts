@@ -2,7 +2,6 @@ import { forEachKey, isArray } from '@riadh-adrani/obj-utils';
 import { setAttribute } from '../attribute/index.js';
 import { setEvent } from '../event/index.js';
 import { AnyElement, DomChild, DomElementOptions, DomTagName } from '../types/index.js';
-import { error } from 'console';
 import { errorMessage } from '../utils.js';
 
 export const isNode = (o: unknown): boolean => {
