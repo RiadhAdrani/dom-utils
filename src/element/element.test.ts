@@ -15,6 +15,7 @@ import {
   replaceNodeWith,
   setTextNodeData,
 } from '.';
+import { AnyElement } from '../types';
 
 describe('Element', () => {
   it.each([['text'], [1], [false], [undefined], [{}], [[]], [createElement('p')]])(
@@ -100,19 +101,19 @@ describe('Element', () => {
 
   it.each([
     ['hello', 0, 'hello<p></p><p></p>'],
-    ['hello', 1, '<p></p>hello<p></p>'],
     ['hello', 5, '<p></p><p></p>hello'],
     ['hello', -5, '<p></p><p></p>hello'],
     [createElement('div'), 0, '<div></div><p></p><p></p>'],
-    [createElement('div'), 1, '<p></p><div></div><p></p>'],
-    [createElement('div'), 5, '<p></p><p></p><div></div>'],
     [createElement('div'), -1, '<p></p><p></p><div></div>'],
+    [createElement('div'), 5, '<p></p><p></p><div></div>'],
+    [createElement('div'), 1, '<p></p><div></div><p></p>'],
+    ['hello', 1, '<p></p>hello<p></p>'],
   ])("should inject element at position : '%s' -> '%s'", (element, index, expected) => {
     const el = createElement('div', {
       children: [createElement('p'), createElement('p')],
     });
 
-    injectNode(element as Element, el, index);
+    injectNode(element as AnyElement, el, index);
 
     expect(el.innerHTML).toBe(expected);
   });
@@ -273,16 +274,30 @@ describe('Element', () => {
     expect(parent.innerHTML).toBe('text');
   });
 
-  it('should change text node position', () => {
+  it('should change text node position to 0', () => {
     const text = createTextNode('test-');
     const text2 = createTextNode('test-2');
 
-    const parent = createElement('div', { children: [text, , text2] });
+    const parent = createElement('div', { children: [text, text2] });
 
     expect(parent.innerHTML).toBe('test-test-2');
 
-    changeChildPosition(text, 1);
+    changeChildPosition(text2, 0);
 
     expect(parent.innerHTML).toBe('test-2test-');
+  });
+
+  it('should inject node at position 0', () => {
+    const text = createTextNode('0');
+    const text2 = createTextNode('1');
+    const text0 = createTextNode('2');
+
+    const parent = createElement('div', { children: [text, text2] });
+
+    expect(parent.innerHTML).toBe('01');
+
+    injectNode(text0, parent, 0);
+
+    expect(parent.innerHTML).toBe('201');
   });
 });

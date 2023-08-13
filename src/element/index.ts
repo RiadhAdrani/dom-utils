@@ -49,7 +49,7 @@ export const setTextNodeData = (textNode: Text, data: string) => {
  * @param tag existing or custom tag.
  * @param params element options
  */
-export const createElement = <T = Element>(tag: DomTagName, params?: DomElementOptions): T => {
+export const createElement = <T = HTMLElement>(tag: DomTagName, params?: DomElementOptions): T => {
   if (tag.trim() === '') throw new Error('tag cannot be empty.');
 
   const ns = params?.namespace ?? 'http://www.w3.org/1999/xhtml';
@@ -96,11 +96,11 @@ export const injectNode = (
     node = createTextNode(element as string);
   }
 
-  if (typeof index === 'number' && index > -1) {
-    parent.insertBefore(node, parent.children[index]);
-  } else {
-    parent.append(node);
-  }
+  index = index ?? -1;
+
+  const child = parent.childNodes.item(index);
+
+  parent.insertBefore(node, child);
 };
 
 /**
