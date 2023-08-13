@@ -1,4 +1,4 @@
-import { StringWithAutoComplete } from '@riadh-adrani/utils';
+import { StringWithAutoComplete } from '@riadh-adrani/type-utils';
 
 export type Arrayable<T> = T | Array<T>;
 

@@ -1,14 +1,14 @@
-import { cast, isArray, isObject } from "@riadh-adrani/utils";
-import { Arrayable, DomAttribute } from "../types/index.js";
+import { cast, isArray, isObject } from '@riadh-adrani/obj-utils';
+import { Arrayable, DomAttribute } from '../types/index.js';
 import {
   convertAttributeToDomProperty,
   hasNoSetter,
   isDataAttr,
   isNativeToggleableAttribute,
   keyFromDataAttr,
-} from "./utils/index.js";
+} from './utils/index.js';
 
-export * from "./utils/index.js";
+export * from './utils/index.js';
 
 /**
  * toggle the given attribute.
@@ -42,20 +42,20 @@ export const setAttribute = (attr: string, value: Arrayable<DomAttribute>, el: E
   if (isNativeToggleableAttribute(attr)) {
     toggleAttribute(attr, el, value as boolean);
   } else {
-    let $value: DomAttribute = "";
+    let $value: DomAttribute = '';
 
     if (isObject(value) && !isArray(value)) {
       Object.keys(value as Record<string, unknown>).forEach((key: string) => {
         const $v = (value as Record<string, string>)[key];
 
-        const $computed = isArray($v) ? ($v as unknown as Array<string>).join(" ") : $v;
+        const $computed = isArray($v) ? ($v as unknown as Array<string>).join(' ') : $v;
 
         switch (attr) {
-          case "dataset": {
+          case 'dataset': {
             setAttribute(`data-${key}`, $computed, el);
             break;
           }
-          case "style": {
+          case 'style': {
             (cast<HTMLElement>(el).style as unknown as Record<string, string>)[key] = $computed;
             break;
           }
@@ -66,7 +66,7 @@ export const setAttribute = (attr: string, value: Arrayable<DomAttribute>, el: E
     }
 
     if (isArray(value)) {
-      $value = (value as Array<DomAttribute>).join(" ");
+      $value = (value as Array<DomAttribute>).join(' ');
     } else {
       $value = value as DomAttribute;
     }

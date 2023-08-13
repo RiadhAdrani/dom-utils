@@ -1,23 +1,29 @@
-import { isBlank } from "@riadh-adrani/utils";
-import { setAttribute } from "../attribute/index.js";
-import { setEvent } from "../event/index.js";
-import { DomChild, DomElementOptions, DomTagName } from "../types/index.js";
+import { forEachKey, isArray } from '@riadh-adrani/obj-utils';
+import { setAttribute } from '../attribute/index.js';
+import { setEvent } from '../event/index.js';
+import { AnyElement, DomChild, DomElementOptions, DomTagName } from '../types/index.js';
+import { error } from 'console';
+import { errorMessage } from '../utils.js';
+
+export const isNode = (o: unknown): boolean => {
+  return o instanceof Node;
+};
 
 /**
  * Check if the given element is a text node.
- * @param object target
+ * @param o target
  */
-export const isTextNode = (object: unknown): boolean => {
-  return object instanceof Text;
+export const isTextNode = (o: unknown): boolean => {
+  return o instanceof Text;
 };
 
 /**
  * 
  Check if the given object is an HTML element.
- * @param object target 
+ * @param o target 
  */
-export const isElement = (object: unknown): boolean => {
-  return object instanceof Element;
+export const isElement = (o: unknown): boolean => {
+  return o instanceof Element;
 };
 
 /**
@@ -45,34 +51,28 @@ export const setTextNodeData = (textNode: Text, data: string) => {
  * @param params element options
  */
 export const createElement = <T = Element>(tag: DomTagName, params?: DomElementOptions): T => {
-  if (isBlank(tag)) throw new Error("tag cannot be empty.");
+  if (tag.trim() === '') throw new Error('tag cannot be empty.');
 
-  const ns = params?.namespace ?? "http://www.w3.org/1999/xhtml";
+  const ns = params?.namespace ?? 'http://www.w3.org/1999/xhtml';
 
   const el = document.createElementNS(ns, tag);
 
-  if (params && params.attributes) {
-    Object.keys(params.attributes as object).forEach((key) => {
-      setAttribute(key, params.attributes!![key], el);
-    });
+  if (params?.attributes) {
+    forEachKey((key, value) => setAttribute(key, value, el), params.attributes);
   }
 
-  if (params && params.events) {
-    Object.keys(params.events as object).forEach((key) => {
-      setEvent(key, params.events!![key], el as HTMLElement);
-    });
+  if (params?.events) {
+    forEachKey((key, value) => setEvent(key, value, el), params.events);
   }
 
-  if (params && params.children) {
-    const children = params.children;
+  if (params?.children) {
+    const normalized = (
+      isArray(params.children) ? params.children : [params.children]
+    ) as Array<AnyElement>;
 
-    if (!Array.isArray(children)) {
-      injectNode(children as DomChild, el);
-    } else {
-      children.forEach((child) => {
-        injectNode(child as DomChild, el);
-      });
-    }
+    normalized.forEach((child) => {
+      injectNode(child, el);
+    });
   }
 
   return el as T;
@@ -84,16 +84,20 @@ export const createElement = <T = Element>(tag: DomTagName, params?: DomElementO
  * @param parent containing element
  * @param index the index in which the element will be injected. if the index is larger than the number of the parent's children or is negative, it will be injected at the end.
  */
-export const injectNode = (element: DomChild, parent: Element, index?: number): void => {
-  let node: Element | Text;
+export const injectNode = (
+  element: AnyElement | string | number,
+  parent: Element,
+  index?: number
+): void => {
+  let node: AnyElement;
 
-  if (isElement(element) || isTextNode(element)) {
-    node = element as Element | Text;
+  if (isNode(element)) {
+    node = element as Node;
   } else {
     node = createTextNode(element as string);
   }
 
-  if (typeof index === "number" && index > -1) {
+  if (typeof index === 'number' && index > -1) {
     parent.insertBefore(node, parent.children[index]);
   } else {
     parent.append(node);
@@ -119,9 +123,8 @@ export const isElementWithinElement = (element: unknown, parentElement: Element)
  * Check if the body of the document contains the given element.
  * @param element target element
  */
-export const isElementInDocument = (element: any): boolean => {
-  return isElementWithinElement(element, document.body);
-};
+export const isElementInDocument = (element: any): boolean =>
+  isElementWithinElement(element, document.body);
 
 /**
  * Return the index of the given element inside its parent container.
@@ -129,9 +132,8 @@ export const isElementInDocument = (element: any): boolean => {
  * @throws an error if the element does not have a parent element.
  * @param element target
  */
-export const getElementPosition = (element: Element): number => {
-  return Array.from(element.parentElement!.children).indexOf(element);
-};
+export const getElementPosition = (element: Element): number =>
+  Array.from(element.parentElement!.children).indexOf(element);
 
 /**
  * retrieve the number of children within the given element.
@@ -168,12 +170,16 @@ export const removeChildAtPosition = (element: Element, position: number): Child
  * @param element target
  * @param newPosition new position
  */
-export const changeChildPosition = (element: Element, newPosition: number): void => {
-  if (!isElement(element)) return;
+export const changeChildPosition = (element: Node, newPosition: number): void => {
+  if (!isNode(element)) {
+    throw errorMessage('Invalid Input: node is not valid');
+  }
 
   const parent = element.parentElement!;
 
-  if (!isElement(parent)) return;
+  if (!isNode(parent)) {
+    throw errorMessage('Unexpected State: parent is not a valid node');
+  }
 
   injectNode(element, parent, newPosition);
 };
@@ -182,10 +188,12 @@ export const changeChildPosition = (element: Element, newPosition: number): void
  * remove the given node
  * @param node target
  */
-export const removeNode = (node: Element | Text) => {
-  if (isElement(node) || isTextNode(node)) {
-    node.remove();
+export const removeNode = (node: ChildNode) => {
+  if (!isNode(node)) {
+    throw errorMessage('Invalid Input: node is not valid child');
   }
+
+  node.remove();
 };
 
 /**
@@ -193,11 +201,12 @@ export const removeNode = (node: Element | Text) => {
  * @param element target element
  * @param newElement replacing element
  */
-export const replaceNodeWith = (element: Element | Text, newElement: Element | Text) => {
-  if (
-    (isElement(element) || isTextNode(element)) &&
-    (isElement(newElement) || isTextNode(newElement))
-  ) {
-    element.replaceWith(newElement);
+export const replaceNodeWith = (element: ChildNode, newElement: Node) => {
+  if (!isNode(element) || !isNode(newElement)) {
+    throw errorMessage(
+      'Invalid Input: one or both of "element" and "newElement" is/are not a valid child node/s'
+    );
   }
+
+  element.replaceWith(newElement);
 };

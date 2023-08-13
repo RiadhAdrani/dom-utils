@@ -1,6 +1,20 @@
-import { findKey } from "@riadh-adrani/utils";
-import camelCase from "camelcase";
-import { htmlToDom } from "../const.js";
+import camelCase from 'camelcase';
+import { htmlToDom } from '../const.js';
+
+function findKey<T extends object>(
+  callback: (key: keyof T, value: T[keyof T]) => boolean,
+  object: T
+): { key: keyof T; value: T[keyof T] } | undefined {
+  for (const k in object) {
+    const res = callback(k, object[k]);
+
+    if (res) {
+      return { key: k, value: object[k] };
+    }
+  }
+
+  return undefined;
+}
 
 /**
  * convert attribute to dom property
@@ -15,7 +29,7 @@ const fn = (attr: string): string => {
     return pair.value;
   }
 
-  return camelCase(attr.replace(":", " "));
+  return camelCase(attr.replace(':', ' '));
 };
 
 export default fn;

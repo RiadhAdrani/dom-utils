@@ -40,7 +40,9 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
-    "@riadh-adrani/utils": "0.42.2",
+    "@riadh-adrani/obj-utils": "^1.0.2",
+    "@riadh-adrani/str-utils": "^1.0.3",
+    "@riadh-adrani/type-utils": "^1.0.2",
     "camelcase": "^7.0.1"
   }
 }

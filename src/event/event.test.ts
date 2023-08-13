@@ -15,9 +15,8 @@ import {
   unregisterEvent,
 } from '.';
 import { createElement } from '../element';
-import { Callback } from '@riadh-adrani/utils';
 import { errorMessage } from '../utils';
-import { AnyElement } from '../types';
+import { Callback } from '@riadh-adrani/type-utils';
 
 describe('Event', () => {
   let fn = vitest.fn();
@@ -25,13 +24,10 @@ describe('Event', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    count = 0;
 
     fn = vitest.fn();
     el = createElement<HTMLButtonElement>('button');
   });
-
-  let count = 0;
 
   describe('isValidEventName', () => {
     it.each([

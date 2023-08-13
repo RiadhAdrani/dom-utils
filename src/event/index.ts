@@ -1,4 +1,5 @@
-import { Callback, cast, hasProperty, isFunction } from '@riadh-adrani/utils';
+import { hasProperty, isFunction } from '@riadh-adrani/obj-utils';
+import { Callback, cast } from '@riadh-adrani/type-utils';
 import { AnyElement, DomEventHandler, DomEventName } from '../types/index.js';
 import { errorMessage } from '../utils.js';
 
